@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.env*
+*.sqlite*
+*.db
+*.joblib
+*.pkl
+*.nc
+*.h5
+*.xlsx
+*.xls
+*.log
+node_modules/
+.venv/
+credentials*
+*authkey*

@@ -1,0 +1,1697 @@
+[
+  {
+    "source_relative_path": "01_데이터수집/ASOS/download_kma_public_asos.py",
+    "sha256": "1965b8b84694c1e48452cbf9f55402483a93f300e6375f671e3eca0f042d4ecf",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/ASOS/기상청_환경자료_수집실행.ps1",
+    "sha256": "1bb6490a427cf5a8c2c538e755540d3f64f1a2a5e612a40cac73f1f7451bb41f",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/ASOS/기상청_환경자료_수집실행.py",
+    "sha256": "da08097531fe5ff200ae724332bd2cd795967fc63d5efb721918c3c30aaa1986",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/Blockdata/build_daily_from_blockdata_live_v1_2026-08-26.py",
+    "sha256": "848eb9029a653c940b081a0ecfccd3d2b82fae98a0e2384864a5f7d863a938de",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/Blockdata/build_daily_gap_estimate_v1_2026-08-26.py",
+    "sha256": "19b6c1f70ec5ef19ff0f9cffd23bc3496689ac53ece5c498c3e5d911545793be",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/Blockdata/collect_blockdata_history_v1_2026-08-25.py",
+    "sha256": "e92c4ed3b76478046b5ea61015996ca0d080577cdc4cdd8f6814d9bbf111efd6",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/generate_collection_status_v1_2026-09-02.py",
+    "sha256": "64bfe5391d707d85ec9d9676f8c150f947426010577906ecf726f2e14d7cdc8b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/resume_yeonggwang_backfill_v1_2026-09-03.py",
+    "sha256": "5d16488ebda6d37ee075711b997446b04eab3fed6fe570c2e87fb4e31d3ee9db",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/격자예보/collect_grid_forecast_backfill_v1_2026-09-01.py",
+    "sha256": "61cd85f66dded22fab7dd50ff7a1b5e7627305da2c83825d078e7009de5f2c29",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/격자예보/collect_gwangju_grid_missing_60d_v2.py",
+    "sha256": "c562c9ad7f265dbffd5a0639c16d22461fef032785656e910a7c868d1655b921",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/격자예보/collect_gwangju_vec_710d_v1.py",
+    "sha256": "f293723bae16828d05a677d5e40162df9c6896346eb63f4619af6e927a06890a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/격자예보/collect_gwangju_wsd_pop_710d_v1.py",
+    "sha256": "9c3fefd5a86647546bbe68a20b4556cf8f7d350119fc863bce6b5263caaafa4b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/격자예보/collect_yeonggwang_grid_710d_v1_2026-09-01.py",
+    "sha256": "354d3a75d1b0b1f91678c2aea4f3fa8d5f492cd7fec8c7096e2c714ab801e352",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/격자예보/validate_gwangju_grid_step1_v1.py",
+    "sha256": "b5d547b73ecb16b849931d0ac15ed7035b70b8dcd1a75954c66d20ea8a50444a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/backfill_asos_gap_20260805_20260824_v1_2026-08-26.py",
+    "sha256": "74d308d00c531d1284069c2da37e85d53d5167290c0be0d671cab15c9a902bd1",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/backfill_buan_asos_apihub_auto_v1_2026-08-31.py",
+    "sha256": "1ab389180c770f5d9405a1ce2af73eb2ebb7eac6301f638ff9e10cce56108568",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/backfill_buan_asos_apihub_v1_2026-08-28.py",
+    "sha256": "e1f9548ee9fa7b77a3b32a107ecd3d8c87c627343bdae45181265a345c704515",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/backfill_buan_grid_forecast_v1_2026-08-31.py",
+    "sha256": "81b8221ee1a569e39d4a24c9175de43881a05a5dcb4b957ff598f2d176968e7b",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/backfill_gimje_grid_forecast_v1_2026-08-31.py",
+    "sha256": "04db9e5366e593e6ba90d0d5ac4bfe67f1a42488892a692dbb65e9f67735c47f",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/backfill_yeonggwang_grid_forecast_v1_2026-08-31.py",
+    "sha256": "3821579a9c8eb858caa817719530586accdda76ef1c7572c5dc67be2e2a177e7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/collect_kma_asos_grid_live_v1_2026-08-25.py",
+    "sha256": "1e87e508bed91033b0e2c0e3b605fc98f6addbf286779537e7d0b6aa613966c8",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/collect_kma_nwp_d1d2_extended_v1_2026-09-08.py",
+    "sha256": "10edc267b6a1a84a74d4127bf40902ed4d33c3168de642b1fdc147ebdfb2baa7",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/collect_kma_nwp_live_03run_v1_2026-08-29.py",
+    "sha256": "b0ac8652ce737c5899ab6e75566ae7a835470471f603850c3feecddace8570c3",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/collect_kma_nwp_live_buan_v1_2026-09-01.py",
+    "sha256": "16467f81185db050e96f2ef0b2f23b950eb874ebae4d645486dba45588dce75c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/collect_kma_nwp_live_d2_v1_2026-08-26.py",
+    "sha256": "d6e428a2bc225f1e82a8b767460c4a5a14725ae44884533bc26844337ce61b92",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/collect_kma_nwp_live_gimje_v1_2026-09-01.py",
+    "sha256": "252381c558d5fecc4e6db2c955647403da2cfa3d2a321f1415b5f5c396a08b3b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/collect_kma_nwp_live_v1_2026-08-25.py",
+    "sha256": "4bc906c3a0cd4c32907d5600fdbb3f4928bbf95db21ec52f8777424c3f288716",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/collect_kma_nwp_nc_d1d2_extended_v1_2026-09-09.py",
+    "sha256": "16d20e175e723f71af9e841e030178ca6772934d1f54208e9fc7ee429b761fdf",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/collect_kma_nwp_nc_live_v1_2026-09-09.py",
+    "sha256": "9518273d3de5327cc57c60579d7715cec400d6372d483193cb9ac028b17b81a7",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/diagnose_kma_nwp_kimr_missing_v1_2026-08-26.py",
+    "sha256": "104e10f7f05d3bc34132eb5d4b824cc36ee8fd0e3ce81ab438ce7dad46481327",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/measure_nwp_availability_v1_2026-08-27.py",
+    "sha256": "ad785f7af120515c3f7018fccdde03558d164c9c492677b951e048838ff2c275",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/probe_kma_nwp_d2_feasibility_v1_2026-08-26.py",
+    "sha256": "ca583304a2d0de4d787929f73b7c467abbd9c9282965dfa97e9d334b7fa4edc9",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/report_0900_kim_nc_점검_2026-09-09.py",
+    "sha256": "fee68ac72fc66bc323b7612c5c982d2c558350a0b2b9db34557206ed3370e239",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/resume_gimje_nearby_asos_v1_2026-09-03.py",
+    "sha256": "92c7cef3fab5112433ca9bc031f21ce9ea90f48883159220d83b624e2a52406a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/resume_kma_nwp_d1d2_midnight_v1_2026-09-08.ps1",
+    "sha256": "1189b35d9ac5cf2096281c7fcb9e2e2324c36c8710091fd72119ecf6753fc32d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/run_kma_nwp_d1d2_backfill_hourly_v1_2026-09-10.ps1",
+    "sha256": "081ff8e8244e8c52632a8b6bba9a589b57ca3ce6faeeeb747c46add25df014c1",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/run_kma_nwp_d1d2_backfill_hourly_v1_2026-09-10.py",
+    "sha256": "bbfd4f86b5ea041fd2c388367b1c4c5cbad1a272cf5146fc9216c64dfc7e9d6b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/run_kma_nwp_nc_d1d2_live_scheduled_v1_2026-09-09.ps1",
+    "sha256": "0b7425e4e3f8c3c3809f199b34de36c97d9dca8d082091ff5d8416ec499907c6",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/run_kma_nwp_nc_live_scheduled_v1_2026-09-09.ps1",
+    "sha256": "877f79b3165654758a6ab944d7d921b60bd686c995cb882c626fd7747a06a7e4",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/summarize_nwp_availability_v1_2026-08-27.py",
+    "sha256": "1d579794e5160fc3e69ca1ae6d25501d476d5ae366b162614a4db226fefcad3f",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/기상청_운영/watch_kma_nc_collectors_v1_2026-09-09.ps1",
+    "sha256": "7ba87bbf9c61bedbfed8228f28cc5523dfdd07e217c4d592c55a68269bbbb92d",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/대시보드/generate_gwangju_dashboard_json_v1_2026-09-02.py",
+    "sha256": "fda1b375de5a517b8672c557c202bd48d3e29ef7fbfdd60bc2cd6b2fdbc9cc3d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/수치예보_일사운량/collect_gwangju_nwp_dayahead_fixed_tm_710d_v2_2026-08-20.py",
+    "sha256": "6af1bfd83eccafaae943d181781b2d0062ac54f2dc4cffcd72bbad32517b2d8b",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/수치예보_일사운량/collect_gwangju_nwp_solar_cloud_710d_v1.py",
+    "sha256": "5b6562bda365dbd84bea838b388b185cd7dc3bb1f1470825391770416aab0998",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/수치예보_일사운량/probe_kma_future_solar_cloud_v1.py",
+    "sha256": "6a7a143a07a4430de4af1a175ebd9688a63cd0d0465fbd05cb6f05bae19d42d7",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/collect_gk2a_4sites_bulk_v1_2026-09-01.py",
+    "sha256": "65847ce4b1d95c32b6d6a21bd3c595d3db8b149e58f25f5270a8eca1965f6098",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/collect_gk2a_backfill_710d_orgkey_v1_2026-09-03.py",
+    "sha256": "b04233ef50a1df6097d612c49b20f27d23ab25aaa314081b7011a8d23b943df3",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/collect_gk2a_continuous44d_v1_2026-08-21.py",
+    "sha256": "51ffc40891260d2653501b247fa32434d9ca59622b5e4ae95442ae70f42bca88",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/collect_gk2a_continuous_10min_v1_2026-09-03.py",
+    "sha256": "f33e40621d9176aac8c691c5c55942ae2feea4e99c8ee001a5c088e1dec66383",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/collect_gk2a_continuous_10min_v3_orgkey_2026-09-03.py",
+    "sha256": "1d5fb559b9b5ecb3d3c15515db340e96c1529a36c85a189590bfe85b7f41e3d5",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/collect_gk2a_reverify_5season_v1_2026-08-21.py",
+    "sha256": "83a7146b8018a0364566f5346dfe7b9f789f13d2eb688257c561435c6b5f0ae6",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/collect_gk2a_trial_14d_v1_2026-08-21.py",
+    "sha256": "e3a7f59f4801e3692e1bdf31bc38ab28c8ca9a60b9dad3d2b056277a6d984351",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/extract_sat_features_4regions_v1_2026-09-03.py",
+    "sha256": "19a82a0e816c829cf3d6a8bf297bbd4df58f170532a78415bf6ac67cfa4f28cc",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/extract_sat_features_4regions_v2_incremental_2026-09-03.py",
+    "sha256": "a1d853d08c429d854fdba5a74e9087b991a4ecae4cc6e23dfb3d2746fd6633e2",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/gk2a_org_authkey_2026-09-03.py",
+    "sha256": "b6d1720db73fe9c6023eb8f917e9a3de6c8c1db957f3108310794ca1dc683e89",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "01_데이터수집/위성/merge_ir105_into_continuous_v1_2026-09-03.py",
+    "sha256": "0acc33f6696784e006a9fbf4a2d9c8040432ed7ca520abceef7c28426f0fb38d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/build_gwangju_v6_peer_candidate_v1_2026-09-01.py",
+    "sha256": "6a1d1b0258e7aa256d14bcb7772f272507c7a03a33993ebb39cae9149e5947ac",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/build_official_hourly_dataset_v1.py",
+    "sha256": "8eee9b9959c60e19a97c1cff5afc799c5cf4de4a623c3352f633310f43e7f25d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/build_official_hourly_dataset_v2_2026-08-20밤.py",
+    "sha256": "df075c8dd7dc522e5aa0d708750395cfbb0d5f8eacf191706028f72fd7e6ec61",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/build_official_hourly_dataset_v3_fixed_tm_2026-08-21.py",
+    "sha256": "4dce7fa4510435d20326e4053b3b169d1e539151840a9d9746fec7134465af36",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/build_official_hourly_dataset_v4_segmented_2026-09-09.py",
+    "sha256": "061ccb4db4f8cfefbf7966c4c6f08a9b833a29c31b4ff6016e12af5cb9d5932f",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/clean_nwp_direct_diffuse_bsrn_qc_v1.py",
+    "sha256": "8749780c7fa3e38322ecb34e17309129ff26b458cd3dcacee0c1f2af65e6c561",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/derive_gwangju_future_sunshine_v1.py",
+    "sha256": "d1c7b223dd50f2ef922d3bd3a78e186a761262488bac091a70bb2f95d84620e8",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/derive_gwangju_module_temp_v1.py",
+    "sha256": "0cf1c7153f3fd3110df2f518ab26f5b713c1afcbda313fc2501178c671cfe1e4",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/interpolate_nwp_3h_to_1h_v1.py",
+    "sha256": "375a83307ecc6768d3cdaef1e00c038b39cc1e85794ec1f793c38aac2ae4f34b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/interpolate_nwp_3h_to_1h_v2_fixed_tm_2026-08-21.py",
+    "sha256": "9a811a8139fede1b172bf5e9e1b66a999ce371e9adedd0c48df69d031087fc7b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/rebuild_plant_v4_recovered_2026-08-21.py",
+    "sha256": "d3d4c7ead9f182923df48a4374d86aede66abc8890e6f56fc3a70cd2c3e7933f",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/rebuild_plant_v5_recovered_2026-08-21.py",
+    "sha256": "79aded1b31b7cc04101ca8a74e5c3e29ea48cad3359d206c71ee2d49cafd12e0",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/recover_inverter5_gap_v1_2026-08-21.py",
+    "sha256": "852a51e305561502b8f2aef8e74b2ec33fd65ded90ff121b43ffb8c46d44acd9",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/redefine_inverter_equipment_features_v1.py",
+    "sha256": "f919dcd4d642aa6fd4ac6d3ff6a9d78b342adf5adeabb1704cede68e44a3fe8c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/transform_kma_for_model.py",
+    "sha256": "bd421c7edea9f30d0e371a0f3abf440199f760320c0c274eda818045a8e5f4f7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/공통/peer_comparison_quality_v1_2026-09-01.py",
+    "sha256": "1bdf94588d66e86a14e67f2958881366053bd32bbd042b00fc469858cb18aa72",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/공통/test_quality_status_passthrough_v1_2026-09-01.py",
+    "sha256": "383c357d871b56d481a71257bc8821a079df378b5f626a39bda342049e2f30f0",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/김제/audit_gimje_season_testrows_v1_2026-08-31.py",
+    "sha256": "b9eed01d69d45d4daa76fec59113d849b3129119702bd8610c54817387ab8019",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/김제/build_gimje_time_aggregates_v1_2026-08-31.pre_quality_passthrough.py",
+    "sha256": "3f61ef287f35be2b3fd6a0286ded6785a9ae770603a6f4b19e3e9c69b22a6616",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/김제/build_gimje_time_aggregates_v1_2026-08-31.py",
+    "sha256": "9e71fd61c24a21a9794e9db703ac3edacfd2ca9e96f0fc6755c2320e10ca264a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/김제/combine_gimje_history_power_asos_nwp_v1_2026-08-31.py",
+    "sha256": "c20933b59ed16929ba0f5e1b6309aaa645399dbfe4a88c1a3d02d67d8ede8d87",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/김제/join_gimje_grid_forecast_v1_2026-08-31.py",
+    "sha256": "c609fdfd691fa86f49cd28e558d1719cbd986ed8c1609e682eea9bbde6d39c78",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/김제/prepare_gimje_time_alignment_v1_2026-08-31.py",
+    "sha256": "376369c73dd095227088be2568cfb17998df48deacae602d42970561ea2c3955",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/부안/audit_buan_weather_issue_target_v1_2026-08-28.py",
+    "sha256": "c59bf90b899e0ade1ed2d798addf658e96d9a3767631458eb3eeacacfc4cf032",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/부안/bridge_buan_excel_blockdata_live_v1_2026-08-28.py",
+    "sha256": "2f7116432923d29fc236b2d52713b57915319380c9375e060718921425d004f3",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/부안/build_buan_time_aggregates_v1_2026-08-28.pre_quality_passthrough.py",
+    "sha256": "6212932ce22186f7838af4fd085e16942f8c914e7a27952087c142183b10b255",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/부안/build_buan_time_aggregates_v1_2026-08-28.py",
+    "sha256": "534dc8015f6450e40f6027187fdc59f7b7cd18434a88d78859e50dbc6424e790",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/부안/combine_buan_history_power_asos_nwp_v1_2026-08-28.py",
+    "sha256": "269f624eb3f552a59a0021e962e799a224016827e57c4019cbf64763346e7082",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/부안/join_buan_grid_forecast_v1_2026-08-31.py",
+    "sha256": "62610e8f4aebb22916262a0c910cd1bd4afde03e44139ff5bb2a2cbea51acafa",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/부안/join_buan_issue_target_weather_v1_2026-08-28.py",
+    "sha256": "54bad6829329f3676a8f85afa017f3e6a8c544fa5b2f6791cf4df720755bb158",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/부안/prepare_buan_time_alignment_v1_2026-08-28.py",
+    "sha256": "cbeba0b9a8483cf120a27ebbb2e9ef71f35bae61fc53f8c482b586bd36ea36b5",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/영광/build_yeonggwang_time_aggregates_v1_2026-09-01.py",
+    "sha256": "8397f9dc9614eab189849cf493f1730ec33b04290b1f0f9df9c7c291c5c30f55",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/영광/combine_yeonggwang_history_power_asos_nwp_v1_2026-09-03.py",
+    "sha256": "18463389bd40a2c4ff516dddad07c9779c6ea6875be163a08924eae7d4ab390b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/영광/join_yeonggwang_grid_forecast_v1_2026-09-03.py",
+    "sha256": "12e56f676b39ea915726d4fe4e236c542faa1267ee19e0de7a006cee9dc7b5d8",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "02_전처리/영광/prepare_yeonggwang_time_alignment_v1_2026-09-01.py",
+    "sha256": "8ec9f8c0cfad5383d91241fa00cadfec5c271c08b7869ace3b32238ba3eac816",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/audit_inverter_history_v1_2026-08-27.py",
+    "sha256": "669ca20c76e683cde7db9e3c290673b3b679362c0cb60ceefbf02fb690229406",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/audit_shadow_readiness_v1_2026-08-26.py",
+    "sha256": "7bbfab6b5bfd9e96648b079471b899e1ecd914306ca11610e895a887fea93ae7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/backtest_harness_v1_2026-08-20밤.py",
+    "sha256": "e94e91d9a8171fdf2f32212daaa7bc85b59a811a7da75b4ce9d20c87fab13810",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/blockdata_backtest_최종보고_v1_2026-08-25.py",
+    "sha256": "60d632fc0b14ae261872612f4a03a559d966c720b0d901e092b938e3f4a11151",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/blockdata_export_2차공식모델_v1_2026-08-21.py",
+    "sha256": "955df64e12b01439cc7146abf9bc58c6cc420d0f90a863cdac2aa1337745c460",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/blockdata_export_3차공식모델_v1_2026-08-24.py",
+    "sha256": "c2a77226ed1262e72ad76b36adb7a75922a18b1f99dbaabfcfa8e6590bfc26c6",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/blockdata_export_3차공식모델_v2_2026-08-24.py",
+    "sha256": "63bf5d8b4414d9a50f180f3dfbca697a35b3076ef31ae725febb8f25b6621e63",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/blockdata_export_3차공식모델_v3_2026-08-24.py",
+    "sha256": "c67301d342c2eb8d7451b3c86b364810bbc74664e036a3003db6ad3b6d1e5a91",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/blockdata_export_v1_2026-08-21.py",
+    "sha256": "a037a7c7f9c283b9bcc9248bed7c6b9abe2776b38d44e3d407212b27cb89a861",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/blockdata_export_v4_최종통합_2026-08-25.py",
+    "sha256": "2f52fab034cf7d0b5970f975d308627a7c1d1d09f75f0ee0a44bf49713ac3656",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/blockdata_최종보고서_작성_v1_2026-08-25.py",
+    "sha256": "f4be22229c0293e3b57af958af39f933ea4db72beb234ad5b9bf1cf63841ed7c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/build_datasets.py",
+    "sha256": "6f2d36e29daeab97cb741131a62798ea44137b5d3768df1fecf3333b10ad1238",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/build_hourly_ensemble.py",
+    "sha256": "00daaa16c5e6c4c520ee52981fae4e29a140c1e864b7c4f4eaf1d0386a0aeea2",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/build_regional_dayahead_bundles_v1_2026-09-08.py",
+    "sha256": "4a87b7a84c4acfac25dbd003d29e1025d29d7344fa35b228606d17bf515e3d5b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/build_regional_plus24h_issue_safe_v1_2026-09-08.py",
+    "sha256": "6287b86c1605c28a498cdccb0204c94176562e5f62144c607856f56cb42401d9",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/build_regional_ultrashort_mediumterm_issue_safe_v1_2026-09-08.py",
+    "sha256": "ccf6a75ea92bf876dd3818308f9d52cc786a366d92501dab3229eb8cab848442",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/build_ultra_short_ensemble.py",
+    "sha256": "77bc691d8c56db8eaeb41b3eafcdcafe910db3270c84e6a09e26dc465f7f3246",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/capacity_profile_v1_2026-08-24.py",
+    "sha256": "49bbb568d52f2caeabcb9889d147fd329236f1ca4a5dae3f902c0e31b6bb59f3",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/check_multicollinearity_v1.py",
+    "sha256": "49c08c00d75f75a80072b25c8b5d8988bd065e8a3d255ca1f5152f18ec430817",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/check_multicollinearity_v2_2026-08-20밤.py",
+    "sha256": "1578a70b16659cb4f267e6c66df7821565fad747b4ad442859f5b7c7b01fa178",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/check_multicollinearity_v3_2026-08-20밤.py",
+    "sha256": "ff0fd46bf94f7a0565f57a36c08f2778b65157c92dbc22c81cd83539571f537f",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/compare_gwangju_v5_v6_common_rows_v1_2026-09-01.py",
+    "sha256": "c64ea39ef6a54cf979a7ae6e5e5656807ee6f0a67d1bd1ee842e6e8cd586ac08",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/compare_monthly_baseline_candidates_v1_2026-09-10.py",
+    "sha256": "3f7b3ca14677de676c81c734d751bba36a4e7d60539dd24aeaada43418e63698",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/daily_dataset_v6_구멍보정_로더_2026-08-26.py",
+    "sha256": "23f86277321b8a51c08f9924bf54a5fa2b4947796c6f49625bbef2a9271d82c0",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/daily_dataset_v7_라이브연계_로더_2026-08-26.py",
+    "sha256": "83da9c709c5f85d900e475ec9bc1af741a08f693f321d936bf2763b5d9c3472c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/daily_direct_final_audit_v1_2026-08-25.py",
+    "sha256": "9c787c352a49209ec80e9cf74eee3b8302b9771f4d00bf1ab52bfac6152eb626",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/daily_feature_governance_v1_2026-08-21.py",
+    "sha256": "e7dd14e01e9a68f64cf897733bd8c24fd05bfd7c8bb393e6b9246734b7bfd409",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/daily_feature_group_ablation_v5_공식B_v1_2026-08-24.py",
+    "sha256": "ce792556635844262c34f3b8a6e149b1359e13782eea8cb5d8f24d516b66f74f",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/daily_hierarchy_final_audit_v1_2026-08-25.py",
+    "sha256": "7783cde553aa5ac8ad26c899d24a4806a59b0d9c3a78b83cee60e2d84873ebe2",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/defect_policy_comparison_v1_2026-08-21.py",
+    "sha256": "7b91f1b0d8cc52ae117cae51c0a488b060eec71a488ed1626803de2ddf26d189",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/difswrf_missing_strategy_comparison_v1_2026-08-24.py",
+    "sha256": "1f2a0be18a18c91387e1b61367271423366a11cf59cf64797497d7ba416cabfd",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/e2e_retrain_v5_공식B_v1_2026-08-24.py",
+    "sha256": "5801f4056bafdeacdfc61362bac28e51168c53ab4155b6de1457615b87e01cc7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/e2e_retrain_v5_공식B_v2_⑥반영_v1_2026-08-24.py",
+    "sha256": "df00baea2db68aa5ab0ad6886498c113983d27fdca1f45a8e1380727bc6eb125",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/e2e_retrain_v5_공식B_v3_일간특성군_v1_2026-08-24.py",
+    "sha256": "7380da11d7c23cc69922a7d3f120802b6b14ae8e67081b60576a1d15b03d587d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/end_to_end_replay_backtest_v1_2026-08-21.py",
+    "sha256": "2b87c9aa8b049d6e7b3cc5758b8104312129b4579de8016d690e616f79ca4924",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/ensemble_hourly_v1_2026-08-21.py",
+    "sha256": "aa0ab7970281f701025ad735914f6f30a7c0ebac6ea1b089546959c57bdbca44",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/ensemble_hourly_v2_2026-08-21.py",
+    "sha256": "12f2c64fb870d357bcee8a51d865b35b39eef4b5496723dccbd7a84543d2427f",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/evaluate_gk2a_5season_v1_2026-08-21.py",
+    "sha256": "bbdc03ee477dcc547b5301a4b7e20fcb6b9bf8957f3425002c95164abf3eae05",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/evaluate_gk2a_trial_v1_2026-08-21.py",
+    "sha256": "93b774cfe392627ef355f952067c1566929d292ac26e3fc2354dfb759b2fb341",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/evaluate_ultrashort_shadow_v1_2026-09-08.py",
+    "sha256": "1cdfc544625e8f0f42a703ad868f4cc3ed23214d8cd72f6848b94ac38ac9878d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/factor_phase2_multicollinearity_modelselect_v1_2026-09-03.py",
+    "sha256": "551c37a73bfa96f093dfb790ccbbfc75f913a8923e826a041d2834bd2217552c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/final_consolidated_verification_v1_2026-08-21.py",
+    "sha256": "e12b31539b83758002c0741c09f21c4f7dd146277c88877e45b7a416127143ad",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/fold_hour_prevalidation_v1_2026-08-24.py",
+    "sha256": "f21728f24141b65290594a218b60cf5709a75bc14ddc54f04cd99fbb973b86db",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/golden_replay_단기h24_v1_2026-08-25.py",
+    "sha256": "c0dcab4a28cb733c502977360385ce6b440c194e6c3e3f7b120927990a7a2016",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/golden_replay_전체8종_v1_2026-08-25.py",
+    "sha256": "3d5af05ee3f0d7d42dc161bf8a95545167751391f93290605940c95c9e87d9a4",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/hyperparameter_tuning_v1_2026-08-21.py",
+    "sha256": "0e421c87afd172444a829516cb52d4f319236613712d4bcc3687c4c6f3224e24",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/inverter_capacity_availability_v1_2026-08-21.py",
+    "sha256": "b4473061fc8194e6bd30b03038938264b4f7286f234811610c5145d813194fbd",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/inverter_disaggregation_cv_v1_2026-08-27.py",
+    "sha256": "d4804f6e09f1ad5b1b2281a6cf4bcfa38e6f4d0dde255ec2bc68998cfb78d39a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/inverter_disaggregation_daily_cv_v1_2026-08-28.py",
+    "sha256": "88a372ab84b829f02dc8bfa7721c8784a483ea6e8417a4fc8cc5efea82c4d4b7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/inverter_disaggregation_daily_cv_v2_기상특성추가_2026-09-03.py",
+    "sha256": "5044a5a8c2081720c1e29cb1a6041044b08b16f066e2d0843233f06f73356724",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/kpx_dayahead_candidate_reverify_v1_2026-08-24.py",
+    "sha256": "f996ab299671c7e4c0fcce851c019e6bdfdfb657b738ed1e1756e5004b5e4ecd",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/kpx_dayahead_final_verify_v1_2026-08-24.py",
+    "sha256": "10c38ecd4b5869f4a0ed81c8e0c4867d6747addeafc15efac6d661915951ab15",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/kpx_dayahead_more_candidates_v1_2026-08-24.py",
+    "sha256": "c0c069a0ac9748e0fbcd258afba354b24fed43fcfe97af0c3129603109379650",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/kpx_mode_backtest_v1_2026-08-21.py",
+    "sha256": "ac57c30a1be8d846435148a77c9a7628f6b587d53c03e0b4626ba91e4619693b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/kpx_mode_backtest_v5_공식B_v1_2026-08-24.py",
+    "sha256": "9f411f642af23c5845f10a7c079f6d061fc07ff9632594f6555411e0a9d2e5ba",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/kpx_nmae_relogo_verify_v1_2026-08-24.py",
+    "sha256": "7bb11149d35748bfdb724e8387fd34a94bf95f92ae9e6e70d3d31ba4ef89e620",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/kpx_nmae_rescore_candidates_v1_2026-08-24.py",
+    "sha256": "c507831a6558b5dc17ae8ed64ed20d9722ae1902c033f36067429edc21e6f39c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/live_feature_assembler_ultrashort_v1_2026-09-08.py",
+    "sha256": "d2e2421fbd86877d3b3d5329cfaea01ab65ff84b33c1dcb2a546403dffc4dbfe",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/live_feature_assembler_단기_v1_2026-08-26.py",
+    "sha256": "75263924203e0177d1966d0e9c0a88f79782ab479b45c1261308359a886efbb2",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/live_feature_assembler_단기_v2_pooled_2026-09-10.py",
+    "sha256": "417cb0bb8ac6f702ee8719bcfeaeda65a2ffae3c270169b51fc6f9f109272b57",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/live_feature_assembler_초단기_v1_2026-08-26.py",
+    "sha256": "e2eb48821edaca2b87790f83c4b0b1e76b71ef45142e270a0280c70db156aade",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/model_common.py",
+    "sha256": "bfc081973d38c50db9039ef90c24a51589ea769666d28d1375cc849a8925ff7b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/model_improvement_round2_v1_2026-08-21.py",
+    "sha256": "e76456cad71c74697de482a380ca235322c652b0cfca19404fa970dd87d66d70",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/model_improvement_round2_v5_공식B_v1_2026-08-24.py",
+    "sha256": "71a8e46e5831ed43463a65ded3345aa7e5ff78ffc48b39537d125e69f9fe58bb",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/partial_availability_policy_experiment_v1_2026-08-21.py",
+    "sha256": "fbc6035a8365ca03e238556c9d8c3d1908c116f1c1794ceb4e3aa1454a553f4d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/persistence_skill_해설_2026-08-25.py",
+    "sha256": "8d7086e5aad372a3c1095cdb609ab51abfbd4039c1115d214f5b1ec9d9b072be",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/production_inference_utils_v1_2026-08-25.py",
+    "sha256": "c274e9c0bc22b467ef3c8e10ad94152159c92da6d35d7d733d1d3e95ff7290d8",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/production_readiness_check_v1_2026-08-25.py",
+    "sha256": "280f3b18edeb822bb6bd5634a9c4a99f2bea0af6678135a363d6e455091ca2ba",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/pv_pipeline.py",
+    "sha256": "83ee2a68d00d30e1393fe856345fee7637a1260f61cb552355f65b8282a51a41",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/rebuild_regional_dayahead_issue_safe_v1_2026-09-08.py",
+    "sha256": "b95e70c526bb60b98561c983714d5a31b220674b1badd8259545f25caba767af",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/reconcile_daily_v1_2026-08-20밤.py",
+    "sha256": "8016d42cce0f61a70b413919d7d207315ef33085db32d277e2afce2b5afba903",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/reconcile_daily_v2_2026-08-21.py",
+    "sha256": "c561df90c0a34379855e098589801be2e80f4da4da441ae65a7957f7ce801c79",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/reconcile_daily_v3_2026-08-21.py",
+    "sha256": "2a9019157c84b646de3d3110db3871d837df0dc211d6e28609c19070e8611567",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/report_20시_shadow_점검_2026-09-08.py",
+    "sha256": "749202665f822d8cfe7511f168bf44d9d3e6f8b2ef4319314d412df846b6aedc",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/residual_stacking_xgb_lstm_v1_2026-09-03.py",
+    "sha256": "9ed223b6a283ae84b5a422b1e5b520db8ca86df3d6a376645e8ac477b12abb02",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/retrain_exclude_daily_combined_v1_2026-08-26.py",
+    "sha256": "fe5fdea10076bbf51eece3f7c5f57cb30cf0c772578c548f6db3bf6b0e2c058b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/retrain_exclude_difswrf_daily_v1_2026-08-26.py",
+    "sha256": "114b1f7a14681fea6d8e2db3cc1ee4be53fcc808d2074fbb73c490630a380ad5",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/retrain_exclude_dswrflx_ultra4_v1_2026-08-26.py",
+    "sha256": "3ca1bba436172f48040abc436a6440795148ea74a0b2b5a058faf5c441ea68e8",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/retrain_exclude_dswrflx_v1_2026-08-26.py",
+    "sha256": "db2032ccb258cfe0826c38c3af380da0cb9d7459cb369f7d847557fa00003134",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/retrain_exclude_dswrflx_v2_명시적제거_2026-08-26.py",
+    "sha256": "616ba693a9b9c38aa577c38c95c549ba57db6d19d1d7479af19a23b20c638aed",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/retrain_exclude_mean_communication_ok_v1_2026-08-26.py",
+    "sha256": "961801292ef967c7fe6dd00ff77d00bc1eecd9428115ef0c7eb5c902e6c838da",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/retrain_regional_short_segmented_candidate_v1_2026-09-09.py",
+    "sha256": "d598dc7531bed14ff06225f380b0655e4df6cc8cbc41781dfe036f2de112b12a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/revalidate_all_horizons_issue_safe_v1_2026-09-08.py",
+    "sha256": "cffb72f16b549fc84718826f83382b80540eced7cd824ff86a98483c8bdd5f84",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/revalidate_inverter_disaggregation_issue_safe_v1_2026-09-08.py",
+    "sha256": "5c46611690abbadfd99e71820b6414c818ec68ab849bad9cd3035c0f79bff4f8",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/run_gwangju_v6_officialB_revalidation_v1_2026-09-01.py",
+    "sha256": "67c062e66ea6379cfdc2523d0ba8f822ff7306864463c626552d3777d66c4898",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/run_live_feature_assembler_단기_v2_pooled_shadow_2026-09-10.ps1",
+    "sha256": "850c6fd35e3d4805f1e02e78959fc635bb3eee487488ad898cd5cf32b0d78e2c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/satellite_crossvalidation_v2_2026-08-24.py",
+    "sha256": "9d253e4f415c4acc8ffe2157fc1c5fca8b3ce43af02a2d38d69938a8fc5f369e",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/satellite_crossvalidation_v3_최종검증_2026-08-25.py",
+    "sha256": "6587ec51c5d40f62e6d469a8acc778b469438e1fe2defba032bd028d0c49a5cb",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/satellite_crossvalidation_v4_연속블록_2026-08-25.py",
+    "sha256": "aeb5994e9f24b298ae9a48eb31ad1db22c85f0ca774c7c2d83eecb42773fe702",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/select_and_check_all_factors_v5_2026-09-03.py",
+    "sha256": "8ac48b605e3248c87c8fe90746e07c19007a111b9b33efd7c301044b8a80bcb5",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/select_and_check_time_factors_v4_2026-09-02.py",
+    "sha256": "807780ae272dbdc401a6022c88ae1a3f42019fc2df9829e2a1dfbe2aa48dab5c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/select_by_importance_v6_2026-09-03.py",
+    "sha256": "f043a1f74bc38a18f9476a302718d274291b80b12ac0524b8c7afb7d1b6a5e8f",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/select_features_by_correlation_threshold_v1.py",
+    "sha256": "da49e5db58e2148d38499f51b412ff8fd3c56b85acb13ff1767cb387035f98be",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/select_features_by_correlation_threshold_v2_2026-08-20밤.py",
+    "sha256": "adceae5b9b9860128fe08332ca958e5919ab3e50febfbf185669bfb5cf8a1a5d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/select_features_by_correlation_threshold_v3_2026-08-20밤.py",
+    "sha256": "3a11d48cc8ae0b11df23606ea49c4ee67e4eac092a399109a3fbebfb5ba34d58",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/shadow_predict_단기_v1_2026-08-26.py",
+    "sha256": "51cb51ecafbefdb400691729c2f3f5ca68131557c19402bb2fcb5ec1eb3a5faf",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/shadow_predict_일간_v1_2026-08-27.py",
+    "sha256": "b67965a2917ef8a30ce5027138d3b4983d597d525b6dc09ce1a5be26d3d45d15",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/shadow_predict_초단기_v1_2026-08-26.py",
+    "sha256": "ac1441778936951c38476b71f444c666f50a2e447e45d84138708eabc91632ba",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/shadow_readiness_일간_v1_2026-08-26.py",
+    "sha256": "89f45fe962c484137c5502caf602245a7f46f1f366b67faa21cd82ac4eb6474d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/shadow_readiness_일간_v2_v7연계_2026-08-26.py",
+    "sha256": "be81f6a61b0e4723055472632744a65b77f6b601fd8f51031efa48dde75dd6e4",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/short_difswrf_c전략_연결_재감사_v1_2026-08-25.py",
+    "sha256": "676f86e749d76ac2147b655b7bb99c6229754d0b8a1ff1fc0f20d94a9e5e2922",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_daily_official_v1_2026-08-20밤.py",
+    "sha256": "06af3c8327276fbba39c52c28cb38fd907bddd30238a00efdcf00bcfb1562eae",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_daily_official_v2_2026-08-21.py",
+    "sha256": "bffbaf7069baab81dd473ebfc268d009b0ba755aa2dfbb933ec50eebba70b3f0",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_gwangju_monthly_improvement_candidate_v2_2026-09-10.py",
+    "sha256": "d90f428a367ce21593eab99207058d575cec47499b8263bbb7106097bdb3fbca",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_hourly_daytime_multihorizon_v1_2026-08-20밤.py",
+    "sha256": "ded7da084c558a26bd4d0323a4269991cbbfeafa232d9d934619ecc123e9f8ff",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_hourly_daytime_multihorizon_v2_2026-08-21.py",
+    "sha256": "1b11c645fcec3ca3d30f8902fb3cf74cf0b0e70a5330f19ae46d1b0437960706",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_hourly_deep_v2_2026-08-20밤.py",
+    "sha256": "6f6b2d47871cd96633202f03610a282fb7b0badb0739ed9a72448ee6cb36556e",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_hourly_deep_v3_2026-08-21.py",
+    "sha256": "6c305e5401ed97e371f1f7172002de7b2e6f4425b300f560b4745a5b339ae5a1",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_hourly_multi_horizon_v1_2026-08-20.py",
+    "sha256": "2f1615672a8cd9a60ba9a93cd0ce3f20ba6bcb32066bf914af201a3cf2c66bd0",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_hourly_official_v1_2026-08-20.py",
+    "sha256": "4ca693c92bad43ed0b4826b2c4cb9d30060f5a66980d6ecb5d63eb20bf05cce7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_monthly_quarterly_annual_v1_2026-08-21.py",
+    "sha256": "082a16366b7cc55d47719d825b338e4f4fdc789425123d13ad46bece4ac13bd3",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_monthly_quarterly_annual_v2_2026-08-21.py",
+    "sha256": "11daf63a512fba260adf5d7ccfc81afc40b63d988df336cd38cb616250170b9d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_monthly_quarterly_annual_v3_2026-08-21.py",
+    "sha256": "0398bf478dec89fbbe9d69451f75d9a13e0e591f175039c864f02894817e1a22",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_production_7종_DSWRFLX제외_v1_2026-08-26.py",
+    "sha256": "73c6eb967c87d10d1c303e2014b39535ddba05bb50edd3d3bff28d001e795b0d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_production_daily_v3_특성정리_2026-08-26.py",
+    "sha256": "b8cfb6c273b74a94559fd86ef2add96064c08baafcfd02378e6a143b59a150b7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_production_daily_v4_DIFSWRF제외_2026-08-26.py",
+    "sha256": "5c1c286c92729b08dde4a7064ce11046351e36dbfc18d5eb6a11b821fe5257d2",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_production_models_v1_2026-08-25.py",
+    "sha256": "2bdaab280dddb20bb6eacf5a8f246ccba4686f7432ca8ac1b6af872c56c7a056",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_production_models_v2_2026-08-25.py",
+    "sha256": "1724b32bde31a7c17bf66984beb50294ece0cbde1e232df5448557232e40b096",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_production_ultra4_v3_DSWRFLX제외_2026-08-26.py",
+    "sha256": "d4ee81e0e688109e25f5e8681185fae5eacea7a772f402346abd2c805991418d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_regional_plus48h_nc_candidate_v1_2026-09-10.py",
+    "sha256": "172a2280d9dd6f59594d90fafe87234ac032aa5e442f9393515e8d354450eb99",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_ultra_short_baseline.py",
+    "sha256": "e5f2bf90f9399723f74e79038ce582b33b228fe5612138cb02dae999bef2f910",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_ultra_short_deep.py",
+    "sha256": "3f8a63df44626bf440855e9f2c6ab8d1d1f9d2d9423fe0321250b6ccc218637e",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/train_ultra_short_official_v1_2026-08-21.py",
+    "sha256": "666f5e98b39115b09d50669cfb61200a0b43d4b4a55d6bb2ad58e5e1b64b8d34",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/ultra_policy_C_decision_retest_v1_2026-08-24.py",
+    "sha256": "fc70e26422fc412df921c491c36e49159bb3bd8c60d46243e290abb1dbff781e",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/ultra_short_clearsky_v1_2026-08-21.py",
+    "sha256": "05b35178a54e0b1725461834f0a0dd54f46916220a99a2d496b2f1e91ba02ef1",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/ultra_short_term_v1_gwangju_2026-09-08.py",
+    "sha256": "73c865a5119209254f505c4ffc0f9be6099262e2bd4127f511b61b15d8737dfc",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/verify_results.py",
+    "sha256": "a6c3801d6f2ba066fa23a943df915bfc8c8e9940114456ebf8bdaff4502eeaaa",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/광주_준비_2026-09-08/retrain_단기_v1_segmented_2026-09-09.py",
+    "sha256": "f428e01af9491330a99fa228daff835f5cfbc02a3c9cf846c3469e3ce77542d2",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/광주_준비_2026-09-08/retrain_단기_v2_pooled_2026-09-10.py",
+    "sha256": "4d8ef32f7955ced792e2251dfe8c5ddf0b05f6fb9ccfc27aa5b8f7325712858c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/backtest_gimje_v1_2026-09-07.py",
+    "sha256": "a283f95b874c1c689e28d34551f87a0725fa05df96cc54f38180593181ad3d10",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/check_correlation_multicollinearity_gimje_v1_2026-09-01.py",
+    "sha256": "5b925a6fd0e83518231460358255d110a1819d286b6515de75c2aea89e8a48bd",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/check_correlation_nearby_solar_gimje_v1_2026-09-01.py",
+    "sha256": "db406f1143bd41602e00029bfcaddc4335302f553f623fe5945dfc69cda82253",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/factor_phase2_run_gimje_2026-09-03.py",
+    "sha256": "edef8c4c2277fefe40464256693756f8271be2f99a14b2399650baf0f07398aa",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/factor_phase2_run_gimje_nearby_solar_v1_2026-09-07.py",
+    "sha256": "7174f9379e77bf3d447cd5faa4a5827117749f5b7598fb7d1be13a56524f770d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/factor_reverify_v6_hourly_gimje_2026-09-03.py",
+    "sha256": "beab520dc09c669c31b5123a1094b946125c12f30930316bc32d13aa263c1791",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/generate_report_charts_gimje_nearby_solar_v1_2026-09-07.py",
+    "sha256": "bf4f7f1454ccd6653b8a30879bf3cdaea41620cba75af4114a7bcc9dcb0ddf81",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/inverter_disaggregation_cv_v1_gimje_2026-09-03.py",
+    "sha256": "1d2f4f8f2d1f6a3bddbd4637133adbdd8a9601b8fced9a1cd35de146c6746633",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/inverter_disaggregation_cv_v2_계측보정_gimje_2026-09-03.py",
+    "sha256": "89c9f70a33b5019482b812831277dff881f49c07837bf8087c3698dce563ad4a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/medium_term_daily_v1_gimje_2026-09-01.py",
+    "sha256": "1ae8f911b1c71bf5eefe18693c30cc9fd786ab21502b3b5abe58a20e71226262",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/medium_term_monthly_yearly_rollup_v1_gimje_2026-09-01.py",
+    "sha256": "b2c79f712316d7632f62eb5bbcea55ff01e62058d1059506c945e0b808a7c719",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/total_output_weather_model_v1_gimje_2026-09-01.py",
+    "sha256": "fb68c0e9a1015afaf7c12e91c23991a07df94bec28fdb3ac7a45f8c36a48ddf0",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/ultra_short_term_v1_gimje_2026-09-01.py",
+    "sha256": "14e7c01dfd03ace561a24b5eee6e7e461b9cd2d48372a83b35f0f1df540331e8",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/ultra_short_term_v2_gimje_multihorizon_2026-09-01.py",
+    "sha256": "9d278a7f75889961749c8f23890d5212b3538d531fc37c4cf25bd2dc045d6285",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/김제_준비_2026-09-01/ultra_short_term_v3_gimje_structuretuning_2026-09-01.py",
+    "sha256": "447e58f9c8f9f4d1a39319bc3f3fb0f4866ccb8892ec9dffa1686de3a18c2989",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/audit_buan_season_testrows_v1_2026-08-28.py",
+    "sha256": "7ed4969e9bc1fcb11d6055730a38f13c404d2a450de16f9a76505d4622b8450e",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/backtest_buan_v1_2026-09-07.py",
+    "sha256": "dc2c171177ffde4c3d5081015acd5aea584e800fc705b62e02c681ced49a88a6",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/check_multicollinearity_buan_v1_2026-08-31.py",
+    "sha256": "e1b124179a563bb002acc2c476f65e325d0f808a64b7d0cfa97d6bbb6c8e8347",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/factor_phase2_run_buan_2026-09-03.py",
+    "sha256": "72d61f382db4dc73fe043edf7d5fc661d0331ce96454e7894df97f6db0ebfdec",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/factor_reverify_v6_hourly_buan_2026-09-03.py",
+    "sha256": "57f8691e77ba45b35ecc90db9cc2680bf67b1f35f9b16114bf626911210435eb",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/factor_reverify_v6_permutation_buan_2026-09-03.py",
+    "sha256": "9cc93490509613c2bbfe451cba95eb7f072854243893ed6c07dd58bda5501037",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/inverter_disaggregation_ABC_v1_2026-08-31.py",
+    "sha256": "22ea287cd76600bba818f569be65d6b2a4977c10eec7d7aa304ce4041411dec1",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/inverter_disaggregation_ABC_v2_필터수정_walkforward_2026-08-31.py",
+    "sha256": "03af73a80681585c4306c40c42a20640c44cd61fc758715ef1c81c0ddfdb416c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/inverter_disaggregation_ABC_v3_결함구간제외_2026-08-31.py",
+    "sha256": "1f6077a92ddd1d39b47ee5442c84bcdf057ec04c3c57ff585fc7e7948a365a25",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/inverter_disaggregation_ABC_v4_전체구간커버_2026-08-31.py",
+    "sha256": "f69faa726c38145eaa0886dbaafb2594ece15db50b8035489156b3030744eefe",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/inverter_disaggregation_check_v1_2026-08-28.py",
+    "sha256": "a5baa5e8decb47817c161866735186127f40cab37edad4a35d111763e10fda91",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/inverter_disaggregation_cv_v1_buan_2026-09-07.py",
+    "sha256": "39ab4c39fb8dccf196a67ea5acad900b3c677f3604c0ec6c05878a13ffe48ee7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/test_부안_전처리_규칙_v1_2026-08-28.py",
+    "sha256": "999661b864550b47574f59a1a5a14917af255a4ca72da2c05f299c1a5a2072c4",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/total_output_by_target_hour_v1_2026-08-31.py",
+    "sha256": "464f52af178bc5994ec668a676a810475d044f587c381049e4d01f044ac3b28d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/total_output_leadtime_split_v1_2026-08-31.py",
+    "sha256": "dfbc8805001092683caf9fd9f1b88ca4ae5f6ba8444829c7697540d3aa1666b7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/total_output_model_selection_v1_2026-08-31.py",
+    "sha256": "11e225d0e5c0c6ec6ef69d38e4488dc908e3f95020dbd2ebc0eada7c874b31ff",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/total_output_preliminary_model_v1_2026-08-28.py",
+    "sha256": "3533ff8e9e3dffdd4571a9e446b6456c6aaba0eba4a54e0b2f30a7771232b1b8",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/total_output_weather_model_v1_2026-08-28.py",
+    "sha256": "ff76224bf9773cb1b1e271e63cc10f92feddd9340049bd6133742059e07f2f9a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/total_output_weather_model_v2_GRID추가_2026-08-31.py",
+    "sha256": "30de98b101c4f4c6c681dc08536bb5ec8c9346d364a3d7d3b23cc904bde35511",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/total_output_weather_model_v3_저상관특성제거_2026-08-31.py",
+    "sha256": "74ae600a6daec573b0d26fdd7a6f5eaa3a6771aecc2d59e315f7ee53075721b2",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/total_output_weather_model_v4_결함구간제외_2026-08-31.py",
+    "sha256": "9f5eb6359c230beeb4d7fcada1ad3cd94501b195f2bf77e80403374ae677eee2",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/total_output_weather_model_v5_방법론정정_2026-08-31.py",
+    "sha256": "3bab3402392634a37556b339231f339d6f2f6faafb8c6efc828cd8674eba9eb9",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/ultra_short_historical_backtest_v1_2026-08-31.py",
+    "sha256": "4a022f5ff4c68f34c04f05b07e9072104f0393acac1d35cbfbe2cd861e8344fe",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/ultra_short_lag_baseline_v1_2026-08-31.py",
+    "sha256": "936c26c19d4a562fddd0a1e26ef468a78f2539cc0efb9449a24d157949dea57e",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/ultra_short_lag_baseline_v2_shadow_2026-08-31.py",
+    "sha256": "d26021ee0cfa8cc9027de721a14e844483538a324627cee1c53f944a6882a5b0",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/부안_준비_2026-08-28/ultra_short_term_v1_buan_2026-09-08.py",
+    "sha256": "a44271e728d76ac55528110043482554782c6ad4340179534974a99c5ea9bc95",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/backtest_yeonggwang_v1_2026-09-07.py",
+    "sha256": "e6ee5d3010bf6c3dbb91db69abfdd3d82f0a88ce43910ed3863017d2e68435c3",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/check_satellite_correlation_v1_2026-09-07.py",
+    "sha256": "03f335dc6bc920b177745782bd2aaa6b5bdca1087df5a19995253e071c728f7a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/diagnose_idle_zero_impact_v1_2026-09-07.py",
+    "sha256": "27bde065072764da5a2e4344411bf71734f9beae553de09b4715ac796bb70e0a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/factor_build_v6_hourly_yeonggwang_2026-09-03.py",
+    "sha256": "30b66e0a5042a0530ada2c9e1fffd40365894fddc4cc5ffd24044a545073f250",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/factor_phase2_run_yeonggwang_2026-09-03.py",
+    "sha256": "0e455604b46c0aac2b8eef21756d6e9f102700bad9adc28308056e1cfd7cecc6",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/inverter_disaggregation_ABC_v1_yeonggwang_2026-09-07.py",
+    "sha256": "0e6e9a0fa8b9b4ace322ec2f3aafbe9cbadb3d15e268b0e97f9065bdf09635a5",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/inverter_disaggregation_cv_v1_yeonggwang_2026-09-07.py",
+    "sha256": "a5d2409ca82acd844dd77b83d72103d69257bfb87027d5565f7bed741d61665e",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/medium_term_daily_v1_yeonggwang_2026-09-07.py",
+    "sha256": "df74f10bc9819f830225fc974ec8749b01cb21133860dbf3d054e856fe99d073",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/train_yeonggwang_monthly_candidate_v1_2026-09-10.py",
+    "sha256": "90cb8b4d192c0a34ec84041c501a10ed71bfaf3f1c942ce2e24f28fb346b958d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/ultra_short_term_v1_yeonggwang_2026-09-07.py",
+    "sha256": "8b85f543f409e1ca4bb1b80a1d536604097dd194aee7798144d1887af4278f0b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/ultra_short_term_v2_yeonggwang_ramp_2026-09-07.py",
+    "sha256": "f4e8a77324e0650b7bc590741668e16c0bd4bbe63a12d66c144412d7f7d2c798",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/영광_준비_2026-09-03/ultra_short_term_v3_yeonggwang_weather_regime_2026-09-07.py",
+    "sha256": "a6e8e065749612e454617da8b3761f77937f6a54ab0f9cd728a7d33477457c23",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/input_quality_gate_v1_2026-08-28.py",
+    "sha256": "1fd7d9ac5cec8be87c7b49ea6d9e9c8778da41ebcf311f2c48a19a11e57bd552",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/inverter_disaggregation_train_v1_2026-08-28.py",
+    "sha256": "31276fea074d5592d8829e86fb3b45e315ef03608ad878b71a69c73eabe2a2bf",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/inverter_disaggregation_v1_2026-08-28.py",
+    "sha256": "486b11084719dd6e7dffc79e9d49840d8b7957e75abd980ffe3e1f86fb0f6ded",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/live_gate_wiring_v1_2026-08-28.py",
+    "sha256": "a43d0f6388fc9859f63eafac03a9e01e1202fbd1249706a89af37ef1bbee3b3c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/night_gap_audit_v1_2026-08-28.py",
+    "sha256": "623c01c1ca3c52d61d7c0b19b3751e6c500d8c3d24cb7c45762913a3efa126cf",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/nwp_dual_run_manager_v1_2026-08-28.py",
+    "sha256": "8c3ffa4664fbfae6590fe196163cc524bed999ef3ef550665b4faee634f457cb",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/operational_status_v1_2026-08-28.py",
+    "sha256": "d4e6011315f1a08cb817e1869d6b0c1842c7bf88bc854a7e2da8156e56f6c982",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/shadow_gate_judge_v1_2026-08-28.py",
+    "sha256": "9644e252d84e0e9143db42e11a218b0ccd71cbab7cb5ccb94833f215531a265c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/tests/test_input_quality_gate_v1_2026-08-28.py",
+    "sha256": "d28e3b1702dacd6374501c8fd371baa626c4f54225941dc37e8b26043ef077a7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/tests/test_inverter_disaggregation_train_v1_2026-08-28.py",
+    "sha256": "6d3afc02843286da65041a989da26ee3184edae5655024dcb0f8cb5336d90c9f",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/tests/test_inverter_disaggregation_v1_2026-08-28.py",
+    "sha256": "2f3729e4f116d883fe55ef42c9582de456c86b639b7e91736aeeb5f2d2ed3789",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/tests/test_live_gate_wiring_v1_2026-08-28.py",
+    "sha256": "cf25787d8188de2b3b143b8a2c330e239f5fbf1434ad6be655ca8b7ace900222",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/tests/test_night_gap_audit_v1_2026-08-28.py",
+    "sha256": "6c4734d82bebee5766c027076ed388b54ed09c2c400e0c554bfc693d5dbeebb8",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/tests/test_nwp_dual_run_v1_2026-08-28.py",
+    "sha256": "9a4b45ce9fa666ee67f1ecc82965bf87bf9f2c683827ec34fbad0b96a9478824",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/tests/test_operational_status_v1_2026-08-28.py",
+    "sha256": "aa86bc2d2f887ee9c89448cd673783d9e4521318e41a44ea961b8f8f6d6a28a5",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/tests/test_shadow_gate_judge_v1_2026-08-28.py",
+    "sha256": "615f517361b2d8ea3beece31df8fa11a782ee5c19a0f19c7972b8d432722f1a9",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/tests/test_verify_night_gate_wiring_v1_2026-08-28.py",
+    "sha256": "42c752ca80e986a097898327063063f0b53ae3d849f84a341dd2c4eed929fba6",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "03_모델학습/현재_종합파이프라인/운영안전장치_2026-08-28/verify_night_gate_wiring_v1_2026-08-28.py",
+    "sha256": "61e15e59c113d7a212de001eef47da3eb05d40b968102ad9845cc18151405e29",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/audit_short_candidates_offline_v1_2026-09-10.py",
+    "sha256": "fcfdb24034ce3e35a09dc44b675f8ab3720672b280cceda03e397bc240db268d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/compare_gwangju_gap_imputation_domestic_evidence_v1_2026-09-09.py",
+    "sha256": "7776f0be7ecbd84ed5a4d4af91de01dbce2270ed4d736bf62d0b4399b5ee79f5",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/compare_gwangju_interpolation_caps_model_effect_v1_2026-09-09.py",
+    "sha256": "1892ede7ec4ad963b9efad96d9557cfb606e54bcb7a64e156142890d732318ea",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "04_평가검증/compare_gwangju_multicollinearity_thresholds_v1_2026-09-09.py",
+    "sha256": "afff8b175e5aab94330681fbb579bf54dfce4ed235c872c9684fdcc1f24be1d5",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/compare_gwangju_outlier_policies_v1_2026-09-09.py",
+    "sha256": "d3c0b0e02368e79c654732a4ed5f831102478f814ee993a54200819187717e61",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/compare_regional_gap_imputation_reconstruction_v1_2026-09-09.py",
+    "sha256": "50be13752857c7d94f5ca02825f93079365f3e6dffc76f7f13b8b6bdba958b70",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/compare_regional_multicollinearity_thresholds_v1_2026-09-09.py",
+    "sha256": "291e234c7cef6e34fba946977b4c192e97f691ab5263f15709a8f32d4009b793",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/probe_gk2a_satellite_v1_2026-08-21.py",
+    "sha256": "1cc0c35653f2daff78d044a6ad51a7167dcec82dd6a806ddce2ac1ececf2505c",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "04_평가검증/residual_diagnosis_v1_2026-08-21.py",
+    "sha256": "79a4f868a9f6bfd872c99dde0e09e14166809a8bfe5b93614cab58b023330aa6",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/uncertainty_aci_dailyreset_candidate_v1_2026-08-24.py",
+    "sha256": "7b1afb650f6d22573ca016e24fdb876edffaaecfaf5740ce379ff56123a5c50b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/uncertainty_audit_v1_2026-08-24.py",
+    "sha256": "1b34673fa9bd6df07dcb05923fd0abde4f711974f5c0983b06f38bb789d27238",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/uncertainty_audit_v5_공식B_v1_2026-08-24.py",
+    "sha256": "89f87302f0069f1d7017bf8cd069564e34766f5cd4625da635937598de81e67d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/uncertainty_conditional_candidate_v1_2026-08-24.py",
+    "sha256": "2c62df0863e65dc6656518a80a056ff636c5b7aebe5fe02f7b49f243ef634135",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/uncertainty_official_v1_2026-08-24.py",
+    "sha256": "791cc86eae67667464b412e9b477f6900022f6ebe81cc01610814b726416f143",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/uncertainty_recheck_초단기4h_v2_v1_2026-08-24.py",
+    "sha256": "938035a9eea8b9ee1671f1aff9ad9959d2b81976ea69f08e42dbfc54d7b6cc27",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/validate_grid_forecast_650d.py",
+    "sha256": "cceef18c6bd526873235ca4e1206dba24b29b48db170965fa7187d7534be5b5b",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/validate_nwp_cloud_layers_v1.py",
+    "sha256": "2286849dea14f822e565bcb48d1505fcc235343fbd0cf28e0c2cbfce12464520",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "04_평가검증/validate_nwp_fixed_tm_v1_2026-08-20.py",
+    "sha256": "7ff198087327418ede0d4ae9dd4cee65ca4c1612976eb230fb51e996d1ee6f71",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "04_평가검증/validate_nwp_solar_cloud_v1.py",
+    "sha256": "339a206b9f600a6db89f3d197198684d4eb381d26fb2cdeafefa11f8d0925fa0",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "05_도구/audit_pv_sources.py",
+    "sha256": "e75da829b95bf11823fff3cd077ed5a2cff33ee1aae729908ded8029e2e2a4c8",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "05_도구/check_total_energy_continuity_v1_2026-08-26.py",
+    "sha256": "dd00cd6925b81ea33ba7cc351a52b81c89409b8fcf009ebef56cdb524726971d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "05_도구/fetch_blockdata_plant_info_v1.py",
+    "sha256": "d44775bf920932496be9a3c1cfd9c1ce7e874113defba3a9f2e8daa7c81d2316",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "05_도구/prepare_available_factor_data.py",
+    "sha256": "262fd0c7bd8a3ccf9e712ded3d6010d6de4c7954f3e117a29edb0f8d7002f9ca",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "05_도구/recheck_blockdata_plant_info_weekly_v1_2026-09-09.py",
+    "sha256": "461b2b98b159fe39d1b9640e0bd1b058b3434cb3704c21a7d9ef7fea352a6be0",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "05_도구/run_blockdata_plant_recheck_weekly_v1_2026-09-09.ps1",
+    "sha256": "ad2eb6c2611fa98fdfbac9000b2df7356747956d95cd41bb4a09ba517e66b87a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "05_도구/기상청_격자대표좌표_계산.py",
+    "sha256": "1c4e4dcfb6247f7ab609629111dc55c7af686a40c6a8603b72eb2e0e1b7ea65c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v1_초기모델/combine_results.py",
+    "sha256": "737bbd05bdf3210fdbb7dbe8396e4e5ec24bdd70c56fbb04895d8fadd7b97dfc",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v1_초기모델/download_kma_asos_156.py",
+    "sha256": "cb3696cf9783698b1daca5e395454c58923084c64b995bac1f8e626aff4ae99a",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "90_과거실험/v1_초기모델/extract_hourly_dataset.py",
+    "sha256": "89572ed506667cd5a0d92b7d9d4d16287cc01e8908e9ed9d27aa673cdad21ddf",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v1_초기모델/run_arima_model.py",
+    "sha256": "4120475332aed70829926828336d3cafec2935ec4e0fa650b655be16ae779f1c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v1_초기모델/run_neural_models.py",
+    "sha256": "853f5fac64fbed643de48b8e99d8ecef82500a2b7c4b2cf0f1ca4a588db1bc56",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v1_초기모델/run_preliminary_models.py",
+    "sha256": "0e6d61cb2e9c6a3b2a0b2d56190ac127a93d45edaaac1821ce49187472437d22",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v1_초기모델/scan_xlsx_logs.py",
+    "sha256": "4cf5b3616cf334cce54a5fd471617f047a2125f39cf5f88fb3d850168738b86d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v1_초기모델/기상청_API허브_과거단기예보_수집.py",
+    "sha256": "8a28fcfdffd355b418d57717018629a48ac44172b38e3739df1ebc11274b1198",
+    "status": "withheld_credential_review"
+  },
+  {
+    "source_relative_path": "90_과거실험/v1_초기모델/기상청_단기예보_수집.py",
+    "sha256": "e29cb6e62f6fedd0f8e1989a2f5a2f9b5f131adb0cc6b5ad1deb4c9fa3ea0d9a",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v2_일단위/build_daily_dataset_v2.py",
+    "sha256": "6326c31d59545ae5e67b739924a5ce1e1a32374ddfa07e85cb247e82f6b2dd7e",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v2_일단위/make_metric_capture.py",
+    "sha256": "af74c97ddd7d1061134eb612a402bb6502f2493e0136b9a8658e5aa3c25aadf9",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v2_일단위/predict_daily_model_v2.py",
+    "sha256": "15dd4d9267cc233417dc2d9f2c89f9b49112831b21fc3831823c413cdc9bcd3c",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v2_일단위/scan_site_logs.py",
+    "sha256": "728a24f4aa22281e956cd93605c4be97eebc54dd4db7f07dcc73946059b340c0",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v2_일단위/train_daily_models_v2.py",
+    "sha256": "e2050f09a6e4301126a3d789fc1c998d10f26563d8b3af120973cfe24ee25c9d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v3_다중수평/build_train_gwangju_multihorizon.py",
+    "sha256": "619e2c2ee7a8b42cfda7f2da7056bf7d2276ba2e709385f11d2b8fbeeddc4ad7",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v3_다중수평/download_gwangju_weather.py",
+    "sha256": "3aa45b32f3977503a58112db8fe1c99cee08e03c9ac88ed34605336d41bdba61",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v3_다중수평/download_terrain_grid.py",
+    "sha256": "86ef3499e06106fbcaeaa57c6325ce9a243ad3fdccd19495c4637ed0d8a69c0d",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v3_다중수평/make_analysis_figures.py",
+    "sha256": "fa30f56fbd32e63b9b73ce248d0bf98888c5fb741ee45802f7bd57cdfb23f320",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v4_open_meteo_비공식_구버전_08-20/train_daily_and_reconcile.py",
+    "sha256": "e689232b1ca95298489123a42ddfb67327cf4c5962b6ea87f5ea75ec45ad09bb",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v4_open_meteo_비공식_구버전_08-20/train_hourly_baseline.py",
+    "sha256": "8069b6796d3bbf7478b495cc29e8ebefadc89d32267bb4598370fde82a434539",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/v4_open_meteo_비공식_구버전_08-20/train_hourly_deep.py",
+    "sha256": "762bcc502a48658fe7a85cc125a257c6ba5e3e6acda890faae67bc11f29f59b2",
+    "status": "exported_legacy_source"
+  },
+  {
+    "source_relative_path": "90_과거실험/잘못선택_API/inspect_kma_sun_sfc_day_v1.py",
+    "sha256": "ef5310fab5d78fd5a9e0ae3b2adecf0ab3fcef2e07d3d3fc90647e05aa830a22",
+    "status": "withheld_credential_review"
+  }
+]

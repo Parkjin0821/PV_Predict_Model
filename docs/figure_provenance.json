@@ -1,0 +1,47 @@
+[
+  {
+    "file": "evidence_01.png",
+    "source": "04_평가검증/outputs/3지역_결측보간_마스킹복원_v1_2026-09-09/01_3지역_보간법_MAE.png",
+    "sha256": "863628a886c85215237cb3ff171edf13d1a2cc3f23aa1092edeb54b7908480f9"
+  },
+  {
+    "file": "evidence_02.png",
+    "source": "04_평가검증/outputs/3지역_다중공선성_임계값비교_v1_2026-09-09/01_3지역_VIF_쌍상관_MAE.png",
+    "sha256": "f680fd56cc145a294ce0dff7c54de01f80519401970868fdcb5784b71842bf85"
+  },
+  {
+    "file": "evidence_03.png",
+    "source": "04_평가검증/outputs/광주_결측보간_국내근거비교_v1_2026-09-09/01_공백길이별_MAE.png",
+    "sha256": "3d2d6ec042eafe17308de5f3b12097ee93cab99fedd5dff7f8fd9912680b7213"
+  },
+  {
+    "file": "evidence_04.png",
+    "source": "04_평가검증/outputs/광주_결측보간_국내근거비교_v1_2026-09-09/02_10분공백_방법별_예시.png",
+    "sha256": "ed99d641d80e63b52053d4bb19ecc45d991bae1ae8b7651150fddce2801d35a5"
+  },
+  {
+    "file": "evidence_05.png",
+    "source": "04_평가검증/outputs/광주_결측보간_국내근거비교_v1_2026-09-09/03_10분공백_급변도별_MAE.png",
+    "sha256": "2fc22f8b418c24863cc03e2c807dc9d6bfc45bcaae7ecb2a609e288db924b98e"
+  },
+  {
+    "file": "evidence_06.png",
+    "source": "04_평가검증/outputs/광주_다중공선성_임계값비교_v1_2026-09-09/01_VIF_쌍상관_임계값_MAE.png",
+    "sha256": "5ee1816d8d6c2121e6932b36b6efef745874bd47e02c1f03282f40f7bf0f5514"
+  },
+  {
+    "file": "evidence_07.png",
+    "source": "04_평가검증/outputs/광주_보간상한_모델영향비교_v1_2026-09-09/01_보간상한별_MAE_학습행수.png",
+    "sha256": "6f0c60cb40e0e268d630c4de093f736756e2f405e64df1dcb732adb7b0687607"
+  },
+  {
+    "file": "evidence_08.png",
+    "source": "04_평가검증/outputs/광주_이상치정책_비교_v1_2026-09-09/01_이상치정책별_MAE.png",
+    "sha256": "f4402eed0b4f1f3846a74bde668084accc776361e2849d7d6333fd28aca17a1d"
+  },
+  {
+    "file": "evidence_09.png",
+    "source": "04_평가검증/outputs/광주_이상치정책_비교_v1_2026-09-09/02_이상치정책별_제거행.png",
+    "sha256": "9d11a8d64d4a53cb7bead1cbd0a4a8841edabb0dd8a417d923e4a6b920e0ad90"
+  }
+]
