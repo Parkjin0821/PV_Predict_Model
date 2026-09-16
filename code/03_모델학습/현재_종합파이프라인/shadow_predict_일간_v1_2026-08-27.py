@@ -122,6 +122,18 @@ def build_live_daily_row(bundle: dict, capacity_kw: float) -> tuple[pd.DataFrame
     hourly = asm.build_live_hourly(now, lookback_hours=96, future_hours=48)
     if hourly.empty:
         raise RuntimeError("라이브 hourly 조립 실패(원자료 없음)")
+    # ★09-14 수정★: build_live_hourly()가 WSD를 두 컬럼으로 내놓는다 -
+    # "WSD"(항상 NaN, 원인 미상 - 공용 조립기 쪽은 안 건드림)와
+    # "GRID_WSD"(실제 값, 체감온도 계산에 쓰이는 그 컬럼). 이 스크립트는
+    # e2e_retrain_v5 학습 시 쓴 이름("목표일예보_WSD_*")을 그대로 기대하는데
+    # 정작 값이 없는 "WSD"를 읽어서 08-27부터 지금까지 매일 이 3특성이
+    # 결측 처리돼 D+1 예측이 단 한 번도 성공한 적이 없었다(09-14 사용자
+    # 지적으로 발견, AGENTS.md 참고). 실제 값이 있는 GRID_WSD를 WSD로
+    # 별칭 지정 - 학습 시 컬럼명(WSD)과 라이브 조립기의 실제 유효 컬럼
+    # (GRID_WSD)을 여기서만 맞춰준다.
+    if "GRID_WSD" in hourly.columns:
+        hourly = hourly.copy()
+        hourly["WSD"] = hourly["WSD"].fillna(hourly["GRID_WSD"])
 
     history = _load_daily_history()
     partial = history.get("부분가용일", pd.Series(0, index=history.index)).fillna(0)
@@ -202,8 +214,16 @@ def main() -> None:
     now = pd.Timestamp.now(tz=KST).isoformat()
     issue = pd.Timestamp.now(tz=KST).tz_localize(None).floor("D") + pd.Timedelta(hours=10)
     target = result.get("예측대상일")
-    reason = result.get("사유") or (
-        json.dumps(result.get("결측특성", []), ensure_ascii=False) if result.get("결측특성") else None
+    # ★09-15 수정(Claude)★: 기존엔 result["사유"]가 "대기" 상태에서 항상
+    # 채워져 있어(assemble_and_predict의 "운영 입력 미충족") or 단축평가로
+    # 실제 결측 피처 목록(결측특성)이 절대 DB에 안 들어갔다 - 09-14에
+    # WSD 버그가 18일간 숨겨졌던 것과 똑같은 로그부실 패턴이 여기 남아
+    # 있었음. 결측특성이 있으면 그걸 우선 저장하고, 없을 때만 일반 사유로
+    # 폴백한다.
+    missing_feats = result.get("결측특성")
+    reason = (
+        json.dumps(missing_feats, ensure_ascii=False) if missing_feats
+        else result.get("사유")
     )
     conn.execute(
         "UPDATE shadow_predictions SET status='superseded' "

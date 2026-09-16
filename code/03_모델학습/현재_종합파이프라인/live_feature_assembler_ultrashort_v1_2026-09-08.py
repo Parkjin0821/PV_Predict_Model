@@ -44,6 +44,7 @@ import importlib.util
 import json
 import sqlite3
 import sys
+import traceback
 from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -53,6 +54,8 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent
+# ★09-16 추가★: pythonw 실행이라 stdout이 사라지므로 예외를 파일로 남긴다.
+LOG_DIR = ROOT / "logs" / "ultrashort_assembler"
 PROJECT_ROOT = ROOT.parent.parent  # 광주_PV_예측모델_통합_v1_2026-08-19
 KST = ZoneInfo("Asia/Seoul")
 SHADOW_DB = ROOT / "shadow_predictions_ultrashort.sqlite3"
@@ -95,7 +98,7 @@ REGIONS = {
         # (공식_초단기_v2_날씨피처_2026-09-08)로 교체.
         mode="full",
         plant_db=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\부안\blockdata_live_v1_2026-08-28\blockdata_history.sqlite3",
-        plant_id=16783, expected_inverters=8, capacity=1000.0,
+        plant_id=16783, expected_inverters=8, capacity=998.715,
         bundle_dir=ROOT / "부안_준비_2026-08-28" / "outputs" / "공식_초단기_v2_날씨피처_2026-09-08",
         solar=BUAN_SOLAR,
         asos_db=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\부안\kma_live_inputs_v1_2026-08-28\kma_live_inputs.sqlite3",
@@ -104,7 +107,7 @@ REGIONS = {
     "김제": dict(
         mode="full",
         plant_db=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\김제\blockdata_live_history_gimje_v1_2026-09-01\blockdata_history.sqlite3",
-        plant_id=7018, expected_inverters=10, capacity=1100.0,
+        plant_id=7018, expected_inverters=10, capacity=999.005,
         bundle_dir=ROOT / "김제_준비_2026-09-01" / "outputs" / "공식_초단기_issue_safe_v1_2026-09-08",
         solar=GIMJE_SOLAR,
         asos_db=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\김제\kma_live_inputs_gimje_v1_2026-09-01\kma_live_inputs.sqlite3",
@@ -113,7 +116,7 @@ REGIONS = {
     "영광": dict(
         mode="full",
         plant_db=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\영광\blockdata_live_history_yeonggwang_v1_2026-09-08\blockdata_history.sqlite3",
-        plant_id=7912, expected_inverters=13, capacity=634.0,
+        plant_id=7912, expected_inverters=13, capacity=639.94,
         bundle_dir=ROOT / "영광_준비_2026-09-03" / "outputs" / "공식_초단기_issue_safe_v1_2026-09-08",
         solar=YEONGGWANG_SOLAR,
         asos_db=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\영광\kma_live_inputs_yeonggwang_v1_2026-09-08\kma_live_inputs.sqlite3",
@@ -122,7 +125,11 @@ REGIONS = {
     "광주": dict(
         mode="full",
         plant_db=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\광주\blockdata_live_history_v1_2026-08-25\blockdata_history.sqlite3",
-        plant_id=6715, expected_inverters=5, capacity=240.58,
+        # ★09-16 수정★: 240.58 → 240.0. 사용자 지시로 "실시간 대시보드에
+        # 표시되는 값"(발전소 API capacity_api_kw=240)을 단일 기준으로 통일.
+        # 이 capacity는 ①예측 clip 상한 ②nMAE 분모 두 군데에 쓰인다.
+        # 변화폭 0.24%라 지표 영향은 무시할 수준이지만 기준을 하나로 맞춘다.
+        plant_id=6715, expected_inverters=5, capacity=240.0,
         bundle_dir=ROOT / "광주_준비_2026-09-08" / "outputs" / "공식_초단기_issue_safe_v1_2026-09-08",
         solar=GWANGJU_SOLAR,
         asos_db=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\광주\kma_live_inputs_v1_2026-08-25\kma_live_inputs.sqlite3",
@@ -143,7 +150,7 @@ def init_shadow_db() -> None:
     중복 저장됐다(48행 중 32성공/16대기였는데 16개 그룹이 중복). 원인은
     유니크 제약이 없었기 때문 - UNIQUE 인덱스 + INSERT OR IGNORE로
     막는다(같은 issue_time 재확인 시도는 조용히 무시, 최초 1건만 유지)."""
-    con = sqlite3.connect(SHADOW_DB)
+    con = sqlite3.connect(SHADOW_DB, timeout=30)
     con.execute("""
         CREATE TABLE IF NOT EXISTS shadow_ultrashort_predictions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -173,7 +180,7 @@ def log_attempt(row: dict) -> bool:
     없을 때 - 은 SQLite UNIQUE 규칙상 서로 다른 값으로 취급돼 매번 새로
     쌓인다는 점은 알려진 제약; 실제 유의미한 issue_time이 잡힌 뒤부터는
     중복이 막힌다)."""
-    con = sqlite3.connect(SHADOW_DB)
+    con = sqlite3.connect(SHADOW_DB, timeout=30)
     cur = con.execute(
         """INSERT OR IGNORE INTO shadow_ultrashort_predictions
            (region, horizon_h, issue_time_kst, target_time_kst, status, reason,
@@ -194,7 +201,7 @@ def load_power_series(plant_db: str, plant_id: int, expected_inverters: int,
                       lookback_hours: int = 30) -> pd.Series:
     """5분 그리드 발전소 총출력 시리즈. 전 인버터 유효한 스냅샷만 채택,
     나머지 그리드 슬롯은 그대로 NaN(보간·부분합계 없음)."""
-    con = sqlite3.connect(plant_db)
+    con = sqlite3.connect(plant_db, timeout=30)
     since = (datetime.now(KST) - timedelta(hours=lookback_hours)).astimezone(KST).replace(tzinfo=None).isoformat()
     df = pd.read_sql_query(
         """SELECT snapshot_time, plant_ac_power_kw, quality_status,
@@ -251,7 +258,7 @@ def lookup_near(series: pd.Series, target_time: pd.Timestamp, tol_minutes: float
 
 def load_latest_asos(asos_db: str, station: int, at_time: pd.Timestamp,
                      tolerance_hours: float = 3.0) -> dict:
-    con = sqlite3.connect(asos_db)
+    con = sqlite3.connect(asos_db, timeout=30)
     row = con.execute(
         """SELECT observation_time, temperature_c, humidity_pct, cloud_pct,
                   wind_speed_m_s, solar_w_m2
@@ -404,12 +411,26 @@ def main() -> None:
     # 있었다(밤사이 부안·김제는 계속 기록되는데 영광·광주만 9시간
     # 동반결측 - 실측으로 원인 확정). 지역별로 격리해 한 곳이 죽어도
     # 나머지는 계속 돌도록 수정.
+    # ★★09-16 추가★★: 이 작업은 **pythonw.exe**로 실행돼 stdout이 통째로
+    # 버려진다. 그래서 아래 except의 print가 아무 데도 안 남고, 영광이
+    # 간헐적으로 실패해도(새 게이트 창에서 영광 97사이클 vs 부안 123사이클,
+    # 26회 누락) **원인을 볼 방법이 전혀 없었다**. 파일로 직접 남긴다.
+    err_log = LOG_DIR / f"assembler_{datetime.now(KST).strftime('%Y%m%d')}.log"
     for region in ["부안", "김제", "영광", "광주"]:
         try:
             run_full(region, REGIONS[region])
         except Exception as exc:  # noqa: BLE001 - 한 지역 예외가 나머지를 막으면 안 됨
-            print(f"[{region} 실행오류] {type(exc).__name__}: {exc}")
-    con = sqlite3.connect(SHADOW_DB)
+            msg = (f"[{datetime.now(KST).isoformat(timespec='seconds')}] "
+                   f"[{region} 실행오류] {type(exc).__name__}: {exc}\n"
+                   + traceback.format_exc())
+            print(msg)
+            try:
+                err_log.parent.mkdir(parents=True, exist_ok=True)
+                with err_log.open("a", encoding="utf-8") as fh:
+                    fh.write(msg + "\n")
+            except OSError:
+                pass
+    con = sqlite3.connect(SHADOW_DB, timeout=30)
     latest = pd.read_sql_query(
         "SELECT region, horizon_h, status, issue_time_kst, target_time_kst, predicted_kw, reason "
         "FROM shadow_ultrashort_predictions ORDER BY id DESC LIMIT 12", con)

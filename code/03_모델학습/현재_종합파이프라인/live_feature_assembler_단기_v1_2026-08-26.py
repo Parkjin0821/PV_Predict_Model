@@ -68,6 +68,9 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parent
 KST = ZoneInfo("Asia/Seoul")
+# ★09-16 신규★: ASOS 실측 지연 p95=552.6분(9.2시간) 기준으로 여유를 두고
+# 12시간까지 뒤로 탐색한다(assemble_and_predict의 동적 issue_time 탐색).
+ASOS_LOOKBACK_HOURS = 12
 BLOCK_DB = Path(r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\광주\blockdata_live_history_v1_2026-08-25\blockdata_history.sqlite3")
 KMA_DB = Path(r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\광주\kma_live_inputs_v1_2026-08-25\kma_live_inputs.sqlite3")
 DIF = "DIFSWRF_bsrn정제"
@@ -187,12 +190,24 @@ def _equipment_5min(end_time: pd.Timestamp, lookback_hours: int) -> pd.DataFrame
     # "5대가 뒤섞이지 않은 진짜 스냅샷인지" 판별이므로, 정격 확정 전까지
     # 임시로 두 값 다 허용해 게이트가 실제 정상 데이터를 막지 않게 한다.
     # 정격이 확정되면 이 조건을 다시 단일 범위로 좁힐 것.
+    # ★09-14 주말루프 52회차 추가★: registered_capacity_sum_kw가 09-09
+    # 20:38을 기점으로 또 240.58 → 241.58로 계단식 전환된 걸 실측
+    # 확인(그 시점부터 09-14 09시 확인 시점까지 5일간 789건 전부
+    # 241.58, 중간값 없음 - 위와 동일한 성격의 전환). 이 셋째 값이
+    # 허용범위 밖이라 09-09 20:38 이후 광주 품질게이트 통과 스냅샷이
+    # 0건이 되어 `live_feature_assembler_단기_v2_pooled_2026-09-10.py`의
+    # gwangju() 경로가 KeyError('plant_output_kw')로 죽는 원인이었음
+    # (UCUBE_ShortPooled24h_Shadow_Daily1430 09-13 14:30 실패 등 - 로그가
+    # 없어 그동안 "ASOS 기근 연쇄영향"으로 오판했었음, 09-14 로깅 추가
+    # 후 트레이스백으로 확정). 같은 원칙(정격 미확정, 임의 결론 금지)으로
+    # 셋째 값도 임시 허용 - 정격 확정되면 세 범위 전부 재검토할 것.
     good = snaps[
         (snaps["received_inverter_count"] == 5)
         & (snaps["valid_ac_power_count"] == 5)
         & (
             snaps["registered_capacity_sum_kw"].between(218.9, 219.1)
             | snaps["registered_capacity_sum_kw"].between(240.48, 240.68)
+            | snaps["registered_capacity_sum_kw"].between(241.48, 241.68)
         )
         & (snaps["measurement_spread_seconds"] <= 600)
     ].copy()
@@ -523,10 +538,43 @@ def assemble_and_predict(bundle: dict, horizon: int, end_time: pd.Timestamp | No
 
     if rebuilt.empty:
         return {"상태": "실패", "사유": "재조립 프레임이 비어있음(원자료 부족)"}
-    issue_time = end_time.floor("h").tz_localize(None)
-    if issue_time not in rebuilt.index:
-        return {"상태": "대기", "사유": "발행시각 행을 조립하지 못함",
-                "발행시각": str(issue_time)}
+    # ★★09-16 수정(1차: 고정 2시간 → 2차: 동적탐색으로 교체)★★
+    # 이 issue_time = "지금 정시"였는데, 광주 ASOS(station 156)는 관측
+    # 시각으로부터 우리 DB 도착까지 실측 지연이 있다(13:00 관측 →
+    # 14:12 수신 사례). 매시 :03 실행이 "이번 정시" 값을 요구했으니
+    # 그 값은 항상 존재할 수 없는 시간대였다 - 08-26 이 파일 생성 이후
+    # 09-16까지 3주 가까이 이 tier(단기 +1h/+24h/+48h)가 **단 한 번도
+    # success를 낸 적이 없었다**(shadow DB 실측: error 52건 +
+    # warming_up 332건, success 0건).
+    #
+    # 1차 수정(2시간 고정 오프셋)은 틀렸다 - 9월 전체 지연 실측
+    # (asos_hourly first_received_at - observation_time)이 중앙값
+    # 72.6분으로는 안정적이지만 **p90=372.6분(6시간+), p95=552.6분
+    # (9시간+), 120분 초과가 23%**로 편차가 매우 크다(특정 날짜에
+    # 몰린 게 아니라 9월 거의 매일 발생). 고정 2시간으로는 실행
+    # 5번 중 1번꼴로 여전히 실패해 "재발 방지"라 부를 수 없었다.
+    #
+    # 최종 수정: 고정 오프셋을 버리고, ASOS 핵심 관측(기온·습도·운량)이
+    # **실제로 채워진 가장 최근 시각**을 매번 동적으로 탐색한다. 지연이
+    # 몇 분이든 몇 시간이든 무관하게 안전하고, 그래도 못 찾으면(진짜
+    # 장기 결측) 정직하게 대기로 처리한다 - 가짜 성공을 만들지 않는다는
+    # 이 파일의 원칙과 일치.
+    ASOS_CORE_COLS = [c for c in
+                      ("기상청관측_기온_C", "기상청관측_상대습도_pct", "기상청관측_전운량_pct")
+                      if c in rebuilt.columns]
+    issue_time = None
+    candidate = end_time.floor("h").tz_localize(None)
+    for _ in range(ASOS_LOOKBACK_HOURS):
+        if candidate in rebuilt.index and ASOS_CORE_COLS:
+            if rebuilt.loc[candidate, ASOS_CORE_COLS].notna().all():
+                issue_time = candidate
+                break
+        candidate = candidate - pd.Timedelta(hours=1)
+    if issue_time is None:
+        latest_candidate = end_time.floor("h").tz_localize(None)
+        return {"상태": "대기",
+                "사유": f"최근 {ASOS_LOOKBACK_HOURS}시간 내 ASOS 핵심관측(기온·습도·운량) 완결 시각 없음",
+                "발행시각": str(latest_candidate)}
     missing_feats = [f for f in bundle["features"] if f not in rebuilt.columns]
     if missing_feats:
         return {"상태": "실패", "사유": f"특성 부족: {missing_feats}", "발행시각": str(issue_time)}

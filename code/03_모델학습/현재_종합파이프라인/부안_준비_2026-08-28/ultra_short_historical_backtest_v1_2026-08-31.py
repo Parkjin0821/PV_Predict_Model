@@ -28,9 +28,17 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 HERE = Path(__file__).resolve().parent
 SRC = Path(
-    r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\부안\시간집계_v1_2026-08-28"
-    r"\부안_인버터별_5분_야간0포함.parquet"
+    r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\부안\시간집계_라이브연계_v1_2026-09-14"
+    r"\부안_인버터별_5분_야간0포함_라이브연계.parquet"
 )
+# ★09-14 변경★: 기존 08-28 정적 Excel 기반 parquet(08-05에서 하드리밋
+# - 원천 자체 한계, 09-14 코덱스 확인)에서 코덱스가 신규 구축한
+# 라이브연계 브릿지(엑셀+Blockdata 라이브 DB, 경계 중복 0건 확인,
+# 2026-09-14까지 연장)로 교체. AGENTS.md 09-14 항목 참고. 이 파일은
+# 공용 모듈이라 원본 SRC 교체가 곧 "공식" 경로에도 영향 - 재학습은
+# 반드시 `retrain_buan_ultrashort_v1_2026-09-14.py`(bundle_version
+# 인자로 별도 폴더 저장)를 통해서만 실행하고, 이 파일의 main()을
+# 직접 돌려 기존 공식 번들을 덮어쓰지 않을 것.
 OUT_DIR = HERE / "outputs" / "초단기_과거백테스트_2026-08-31"
 DEFECT_START = pd.Timestamp("2026-04-15")
 DEFECT_END_EXCLUSIVE = pd.Timestamp("2026-05-23")

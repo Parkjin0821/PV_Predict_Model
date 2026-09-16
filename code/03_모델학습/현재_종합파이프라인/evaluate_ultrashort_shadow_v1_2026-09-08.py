@@ -39,6 +39,76 @@ REGIONS = assembler.REGIONS
 CAPACITY = {r: c["capacity"] for r, c in REGIONS.items()}
 MIN_INDEPENDENT_DAYS = 5
 
+# ★09-16 수정★: 실측 시리즈를 48시간만 읽고 있었다. 평가는
+# `evaluable = due.dropna(subset=["actual_kw"])`로 실측 없는 예측을 버리므로,
+# 48시간 창 = 최대 3개 캘린더 날짜 → independent_days가 **구조적으로 3을
+# 못 넘었다**. MIN_INDEPENDENT_DAYS=5 게이트는 영원히 도달 불가였고
+# (evaluation_status가 항상 "예비치", R²가 항상 null), 누적 성공예측
+# 11,124건 중 8,884건(79.9%)이 매일 그냥 버려지고 있었다.
+# 실측(plant_snapshots)은 광주 08-25·김제 09-01부터 전부 보유하고 있으므로
+# 데이터가 없어서가 아니라 창이 좁아서 생긴 문제였다.
+# shadow 이력 전체를 덮도록 넓힌다(조회는 5분 스냅샷 수천 행이라 가볍다).
+EVAL_LOOKBACK_HOURS = 24 * 60
+
+
+def load_daytime_zero_anomaly_times(cfg: dict, solar_module,
+                                    lookback_hours: int = EVAL_LOOKBACK_HOURS,
+                                    min_run_minutes: float = 15.0) -> pd.DatetimeIndex:
+    """주간 전 인버터 합계 0kW가 연속된 구간의 시각을 반환한다.
+
+    원본을 삭제하지 않고 기상 기반 모델 성능판정에서만 분리한다. 실제 설비
+    정지와 원천 0값 송신을 DB만으로 구분할 수 없으므로 '이상 후보'다.
+    """
+    con = sqlite3.connect(cfg["plant_db"])
+    since = (pd.Timestamp.now(tz=assembler.KST).tz_localize(None)
+             - pd.Timedelta(hours=lookback_hours)).isoformat()
+    df = pd.read_sql_query(
+        "SELECT snapshot_time, plant_ac_power_kw, quality_status, "
+        "expected_inverter_count, valid_ac_power_count FROM plant_snapshots "
+        "WHERE plant_id=? AND snapshot_time>=? ORDER BY snapshot_time",
+        con, params=(cfg["plant_id"], since))
+    con.close()
+    if df.empty:
+        return pd.DatetimeIndex([])
+    df["time"] = pd.to_datetime(df["snapshot_time"]).dt.tz_localize(None)
+    complete = (df["quality_status"].isin(["ok", "warning"])
+                & (df["expected_inverter_count"] == cfg["expected_inverters"])
+                & (df["valid_ac_power_count"] == cfg["expected_inverters"]))
+    daylight = df["time"].map(lambda t: assembler.solar_elev(solar_module, t) > 5.0)
+    candidate = complete & daylight & (df["plant_ac_power_kw"].fillna(np.inf) <= 0.5)
+    flagged: list[pd.Timestamp] = []
+    run: list[pd.Timestamp] = []
+    previous = None
+    for t, is_candidate in zip(df["time"], candidate):
+        if is_candidate and (previous is None or t - previous <= pd.Timedelta(minutes=10)):
+            run.append(t)
+        elif is_candidate:
+            if run and (run[-1] - run[0]).total_seconds() / 60 >= min_run_minutes:
+                flagged.extend(run)
+            run = [t]
+        else:
+            if run and (run[-1] - run[0]).total_seconds() / 60 >= min_run_minutes:
+                flagged.extend(run)
+            run = []
+        previous = t if is_candidate else None
+    if run and (run[-1] - run[0]).total_seconds() / 60 >= min_run_minutes:
+        flagged.extend(run)
+    return pd.DatetimeIndex(flagged)
+
+
+def near_anomaly(times: pd.DatetimeIndex, value, tolerance_minutes: float = 4.0) -> bool:
+    if len(times) == 0:
+        return False
+    t = pd.Timestamp(value)
+    pos = times.searchsorted(t)
+    candidates = []
+    if pos < len(times):
+        candidates.append(times[pos])
+    if pos > 0:
+        candidates.append(times[pos - 1])
+    return bool(candidates and min(abs(x - t) for x in candidates)
+                <= pd.Timedelta(minutes=tolerance_minutes))
+
 
 def evaluate(tol_minutes: float = 4.0, min_independent_days: int = MIN_INDEPENDENT_DAYS,
              representative_issues_per_day: int = 2) -> pd.DataFrame:
@@ -64,7 +134,7 @@ def evaluate(tol_minutes: float = 4.0, min_independent_days: int = MIN_INDEPENDE
 
     actual_series = {
         r: assembler.load_power_series(cfg["plant_db"], cfg["plant_id"], cfg["expected_inverters"],
-                                       lookback_hours=48)
+                                       lookback_hours=EVAL_LOOKBACK_HOURS)
         for r, cfg in REGIONS.items()
     }
 
@@ -94,13 +164,25 @@ def evaluate(tol_minutes: float = 4.0, min_independent_days: int = MIN_INDEPENDE
         lambda r: assembler.solar_elev(solar_modules[r["region"]], r["target_time_kst"]), axis=1)
     representative["period"] = np.where(representative["target_elevation"] > 0, "day", "night")
     representative["target_date"] = representative["target_time_kst"].dt.date
+    anomaly_times = {
+        r: load_daytime_zero_anomaly_times(REGIONS[r], solar_modules[r]) for r in REGIONS
+    }
+    evaluable["operational_anomaly"] = evaluable.apply(
+        lambda r: (near_anomaly(anomaly_times[r["region"]], r["issue_time_kst"])
+                   or near_anomaly(anomaly_times[r["region"]], r["target_time_kst"])), axis=1)
+    representative["operational_anomaly"] = representative.apply(
+        lambda r: (near_anomaly(anomaly_times[r["region"]], r["issue_time_kst"])
+                   or near_anomaly(anomaly_times[r["region"]], r["target_time_kst"])), axis=1)
     evaluable["persistence_kw"] = evaluable["issue_actual_kw"]
     target_clear = np.maximum(np.sin(np.deg2rad(evaluable["target_elevation"])), 0.0)
     issue_elev = evaluable.apply(lambda r: assembler.solar_elev(solar_modules[r["region"]], pd.to_datetime(r["issue_time_kst"])), axis=1)
     issue_clear = np.maximum(np.sin(np.deg2rad(issue_elev)), 0.0)
     evaluable["clear_sky_persistence_kw"] = np.where(issue_clear > 1e-6, evaluable["issue_actual_kw"] * target_clear / issue_clear, 0.0)
     rows = []
-    for (region, h, period), g in evaluable.groupby(["region", "horizon_h", "period"]):
+    for (region, h, period), raw_g in evaluable.groupby(["region", "horizon_h", "period"]):
+        g = raw_g[~raw_g["operational_anomaly"]].copy()
+        if g.empty:
+            continue
         mse = float((g["error_kw"] ** 2).mean())
         mae = float(g["error_kw"].abs().mean())
         rmse = float(np.sqrt(mse))
@@ -110,20 +192,35 @@ def evaluate(tol_minutes: float = 4.0, min_independent_days: int = MIN_INDEPENDE
         # 값이 무의미해진다 - 억지로 숫자를 만들지 않고 null로 정직하게 둔다.
         ss_res = float((g["error_kw"] ** 2).sum())
         ss_tot = float(((g["actual_kw"] - g["actual_kw"].mean()) ** 2).sum())
-        r2 = round(1 - ss_res / ss_tot, 4) if ss_tot > 1e-6 else None
+        independent_days = int(g["target_date"].nunique())
+        # 5분 간격 반복예측 수백 건은 서로 독립 표본이 아니다. 독립일수가
+        # 게이트에 못 미치면 R²가 날씨 하루에 따라 과대/과소 변동하므로
+        # 숫자를 노출하지 않는다. 원시 예측·실측 행은 그대로 보존한다.
+        r2 = (round(1 - ss_res / ss_tot, 4)
+              if independent_days >= min_independent_days and ss_tot > 1e-6 else None)
         rep_g = representative[(representative["region"] == region) &
                                (representative["horizon_h"] == h) &
-                               (representative["period"] == period)]
+                               (representative["period"] == period) &
+                               (~representative["operational_anomaly"])]
+        raw_mae = float(raw_g["error_kw"].abs().mean())
         rows.append({
             "region": region, "horizon_h": h, "period": period, "n": len(g),
-            "independent_days": int(g["target_date"].nunique()),
+            "raw_n": len(raw_g),
+            "operational_anomaly_excluded_n": int(raw_g["operational_anomaly"].sum()),
+            "independent_days": independent_days,
             "representative_n": int(len(rep_g)),
             "effective_N": int(rep_g["target_date"].nunique()),
             "representative_issues_per_day": representative_issues_per_day,
-            "evaluation_status": "예비치" if g["target_date"].nunique() < min_independent_days else "평가가능",
+            "evaluation_status": "예비치" if independent_days < min_independent_days else "평가가능",
             "MAE_kW": round(mae, 3), "RMSE_kW": round(rmse, 3), "MSE_kW2": round(mse, 3),
             "R2": r2,
             "nMAE_pct": round(mae / cap * 100, 3),
+            # ★09-16★ nMAE 분모를 화면에서 바로 확인할 수 있게 노출한다
+            # (09-16 4지역 기준을 발전소 API 정격(AC)으로 통일 - AGENTS.md 09-16(13)).
+            "capacity_kw": cap,
+            "nMAE_basis": "발전소 API 정격(AC)",
+            "raw_MAE_kW": round(raw_mae, 3),
+            "raw_nMAE_pct": round(raw_mae / cap * 100, 3),
             "persistence_MAE_kW": round(float((g["persistence_kw"] - g["actual_kw"]).abs().mean()), 3),
             "clear_sky_persistence_MAE_kW": round(float((g["clear_sky_persistence_kw"] - g["actual_kw"]).abs().mean()), 3),
         })

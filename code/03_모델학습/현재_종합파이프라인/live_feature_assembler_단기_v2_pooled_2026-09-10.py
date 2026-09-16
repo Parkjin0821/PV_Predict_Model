@@ -28,7 +28,17 @@ def power(cfg,issue):
  d["t"]=pd.to_datetime(d.snapshot_time).dt.tz_localize(None);d=d[(d.valid_ac_power_count==cfg["inv"])&(d.expected_inverter_count==cfg["inv"])]
  return d.set_index("t").plant_ac_power_kw.resample("1h").mean()
 def weather(cfg,issue):
- c=sqlite3.connect(cfg["kma"]);a=c.execute("SELECT temperature_c,rainfall_mm,wind_speed_m_s,wind_direction_deg,humidity_pct,local_pressure_hpa,sea_pressure_hpa,sunshine_hr,cloud_pct,ground_temperature_c FROM asos_hourly WHERE station=? AND observation_time<=? ORDER BY observation_time DESC LIMIT 1",(cfg["station"],issue.isoformat())).fetchone()
+ # ★09-16 발견·수정★: asos_hourly에는 cloud_tenths(0~10, 학습 특성
+ # "전운량_10분위"가 실제 기대하는 값)와 cloud_pct(0~100, =tenths*10)가
+ # 별도 컬럼인데, 아래 SELECT가 cloud_pct를 뽑아서 amap의 "전운량_10분위"
+ # 자리에 그대로 넣고 있었다 - 09-10 배포 이후 지금까지 4지역 +24h pooled
+ # 라이브 예측(부안·김제·영광)이 전운량 특성에 10배 스케일 오류를 안고
+ # 있었다(부안 실측으로 cloud_pct=cloud_tenths*10 확인, 모델은 전운량_pct를
+ # 쓰지 않고 전운량_10분위만 씀). +48h pooled 조립기 신규 제작 중 발견해
+ # 즉시 고침. 09-10~09-16 사이 저장된 "성공" 예측 중 이 특성을 실제로 쓴
+ # 것은 스케일이 잘못된 입력으로 나온 값이라 신뢰할 수 없음(과거 행을
+ # 소급 정정하지는 않음 - shadow_short_pooled_predictions에 그대로 둠).
+ c=sqlite3.connect(cfg["kma"]);a=c.execute("SELECT temperature_c,rainfall_mm,wind_speed_m_s,wind_direction_deg,humidity_pct,local_pressure_hpa,sea_pressure_hpa,sunshine_hr,cloud_tenths,ground_temperature_c FROM asos_hourly WHERE station=? AND observation_time<=? ORDER BY observation_time DESC LIMIT 1",(cfg["station"],issue.isoformat())).fetchone()
  g=pd.read_sql_query("SELECT target_time_kst,variable,value,is_missing,first_received_at FROM grid_forecast WHERE target_time_kst>=? AND target_time_kst<=? AND first_received_at<=? AND variable IN ('POP','SKY','REH')",c,params=((issue+timedelta(hours=14)).isoformat(),(issue+timedelta(hours=36)).isoformat(),issue.isoformat()));c.close()
  amap=["기온_C","강수량_mm","풍속_m_s","풍향_deg","상대습도_pct","현지기압_hPa","해면기압_hPa","일조시간_hr","전운량_10분위","지면온도_C"];ad={"issue_asos_"+k:v for k,v in zip(amap,a or [])};ad["issue_asos_지점번호"]=cfg["station"]
  # ASOS 강수량 null은 무강수 시 흔한 원천 표기이므로 기존 전처리와 같이 0으로 해석한다.

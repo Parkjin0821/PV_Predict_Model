@@ -28,6 +28,23 @@ EXPECTED_INVERTERS = tuple(range(1, 11))  # 김제 10대(부안은 8대)
 DAYLIGHT_DAILY_MIN_RATIO = 0.90
 HOURLY_MIN_5MIN_SLOTS = 9
 
+# ★★09-16 신규(사용자 지시 - "인버터별로 계산")★★: 김제는 10대 전수가
+# 같은 5분 슬롯에 보고돼야만 유효로 치는 all-or-nothing 게이트 때문에
+# 9월 완전표본이 0일이었다(최대 daylight_valid_ratio=0.805). 그런데
+# 실측 확인 결과 슬롯당 평균 보고 대수는 9.0~9.7/10(90~97%)로, 매
+# 슬롯이 대부분 관측되고 그중 소수(주로 특정 인버터)만 빠지는
+# 패턴이었다 - 인버터 자체 결측 확률이 1번(127회)~10번(275회)까지
+# 단조증가(기기측 통신 이슈로 추정, 수집기 버그 아님). 시간대별
+# 분포는 6~18시 균일(정오 쏠림 없음)이라 균등보정의 전제가 성립한다.
+#
+# 그래서 "그 슬롯에 있던 인버터들의 평균 × 그 인버터의 평상시 상대비율"로
+# 빠진 인버터를 채운다(전체를 균일하게 나누지 않고 인버터별 특성 반영).
+# 원본 daily_energy_kwh(90% 게이트)는 절대 건드리지 않고, 병행해서
+# daily_energy_kwh_corrected를 별도 컬럼으로 추가한다 - 다운스트림이
+# 명시적으로 선택해야만 쓰이게 한다.
+DAYLIGHT_CORRECTED_MIN_RATIO = 0.85  # 슬롯 평균완전도(관측대수/10) 임계
+RATIO_MIN_DAYLIGHT_POWER_KW = 5.0  # 새벽/황혼 근처 0 근접값 노이즈 배제
+
 VALID_INVERTER_QUALITY_STATUSES = {
     "observed",
     "physical_zero_night",
@@ -112,6 +129,26 @@ def apply_night_zero(aligned: pd.DataFrame) -> pd.DataFrame:
     return x
 
 
+def compute_inverter_ratios(ac_valid: pd.DataFrame, physical_daylight: pd.Series) -> pd.Series:
+    """인버터별 '평소 상대 강도' 비율(ratio_i)을 10대 전수 관측 슬롯만으로 추정.
+
+    ratio_i ≈ 1.0이면 평균적인 인버터, 1.0보다 작으면 그 인버터가
+    평소에도 형제 인버터들보다 조금 약하다는 뜻(예: 노후·음영 위치).
+    이 비율로 결측 인버터를 "그 슬롯 평균 × ratio_i"로 채우면 균등분배
+    (전부 ratio=1 가정)보다 편향이 작다. 데이터가 쌓일 때마다 매 실행
+    시점에 새로 추정하므로 계절이 바뀌거나 설비가 바뀌어도 자동 추종한다.
+    """
+    complete = ac_valid.notna().all(axis=1)
+    total = ac_valid.sum(axis=1)
+    daylight_strong = physical_daylight & complete & total.ge(RATIO_MIN_DAYLIGHT_POWER_KW)
+    base = ac_valid.loc[daylight_strong]
+    if base.empty:
+        return pd.Series(1.0, index=ac_valid.columns)
+    row_mean = base.mean(axis=1)
+    ratios = base.div(row_mean, axis=0).mean(axis=0)
+    return ratios.reindex(ac_valid.columns).fillna(1.0)
+
+
 def build_plant_five(x: pd.DataFrame) -> pd.DataFrame:
     ac = x.pivot(index="grid_time_kst", columns="inverter_number", values="ac_power_kw")
     dc = x.pivot(index="grid_time_kst", columns="inverter_number", values="dc_power_kw")
@@ -140,6 +177,20 @@ def build_plant_five(x: pd.DataFrame) -> pd.DataFrame:
     out["complete_all_inverters"] = out["available_inverter_count"].eq(n_inv)
     out["plant_ac_power_kw"] = ac_valid.sum(axis=1, min_count=n_inv)
     out["plant_dc_power_kw"] = dc_valid.sum(axis=1, min_count=n_inv)
+
+    # ★09-16 신규★: 인버터별 비율 보정 - 원본 plant_ac_power_kw(전수 요구)는
+    # 위에서 그대로 두고, 부분관측(1대 이상)이면 채워서 별도 컬럼에 저장.
+    ratios = compute_inverter_ratios(ac_valid, out["physical_daylight"])
+    present_count = ac_valid.notna().sum(axis=1)
+    present_avg = ac_valid.mean(axis=1)  # NaN 무시 평균 - present_count==0이면 NaN
+    filled = ac_valid.copy()
+    for n in EXPECTED_INVERTERS:
+        missing = ac_valid[n].isna()
+        filled.loc[missing, n] = present_avg.loc[missing] * ratios[n]
+    out["plant_ac_power_kw_corrected"] = filled.sum(axis=1, min_count=1)
+    out.loc[present_count.eq(0), "plant_ac_power_kw_corrected"] = np.nan
+    out["corrected_inverter_count"] = (n_inv - present_count).clip(lower=0).astype("int8")
+    out.attrs["inverter_ratio_profile"] = {int(k): round(float(v), 4) for k, v in ratios.items()}
     out["quality_status"] = np.select(
         [
             out["complete_all_inverters"] & out["invalid_quality_inverter_count"].gt(0),
@@ -201,7 +252,56 @@ def build_daily(plant5: pd.DataFrame) -> pd.DataFrame:
     good = out["daylight_valid_ratio"].ge(DAYLIGHT_DAILY_MIN_RATIO)
     out.loc[~good, "daily_energy_kwh"] = np.nan
     out["quality_status"] = np.where(good, "valid_daylight_ge90pct", "invalid_daylight_lt90pct")
+
+    # ★09-16 신규★: 인버터별 비율보정 daily_energy_kwh_corrected.
+    # `daylight_mean_completeness_raw`는 아직 "지금까지 관측된 슬롯" 기준
+    # 원시합(분자)이다 - 09-15(24) 라이브브릿지 버그와 같은 클래스
+    # (진행중인 당일이 우연히 100%로 오판정)를 피하려고, 여기서는 비율
+    # 계산을 끝내지 않고 원시합만 낸다. 실제 게이트(전체 24시간 격자
+    # 기준 재계산)는 라이브브릿지의 correct_daily_denominator가
+    # 정식 daily_energy_kwh와 동일한 방식으로 마무리한다(정적 실행에서는
+    # 이 스크립트 main()이 직접 마무리).
+    if "plant_ac_power_kw_corrected" in x.columns:
+        x["energy_5min_kwh_corrected"] = x["plant_ac_power_kw_corrected"] * (5.0 / 60.0)
+        slot_completeness = (
+            (len(EXPECTED_INVERTERS) - x["corrected_inverter_count"]) / len(EXPECTED_INVERTERS)
+        ).where(x["plant_ac_power_kw_corrected"].notna(), 0.0)
+        energy_c = x["energy_5min_kwh_corrected"].groupby(day).sum(min_count=1)
+        out["daily_energy_kwh_corrected"] = energy_c.reindex(expected_day.index).to_numpy()
+        recoverable = (x["physical_daylight"] & x["plant_ac_power_kw_corrected"].notna()).groupby(day).sum()
+        out["daylight_recoverable_slots"] = recoverable.reindex(expected_day.index).to_numpy()
+        completeness_sum = (x["physical_daylight"] * slot_completeness).groupby(day).sum()
+        out["daylight_mean_completeness_raw"] = completeness_sum.reindex(expected_day.index).to_numpy()
+        out["quality_status_corrected"] = "pending_full_day_regate"
     return out
+
+
+def finalize_corrected_gate(daily: pd.DataFrame) -> pd.DataFrame:
+    """daylight_mean_completeness_raw(원시 분자)를 **전체 24시간 격자**
+    기준 daylight_expected_slots로 나눠 최종 게이트를 적용한다.
+
+    build_daily()가 내부적으로 쓰는 expected_day는 plant5의 grid_time_kst
+    범위(=raw 데이터가 실제로 존재하는 마지막 시각까지)에 갇혀 있어,
+    "오늘"처럼 아직 안 끝난 날은 지금까지 본 것만으로 분모를 잡는다.
+    09-15(24)에 발견된 daily_energy_kwh 오판정(진행중인 당일이 우연히
+    100%로 보임)과 같은 결함 클래스이므로, 정식 지표와 동일하게 여기서
+    독립적으로 재계산한다(라이브브릿지의 correct_daily_denominator와
+    동일 패턴 - 재구현 최소화를 위해 이 함수를 공유 재사용한다)."""
+    daily = daily.copy()
+    if "daylight_mean_completeness_raw" not in daily.columns:
+        return daily
+    expected = []
+    for day in daily["date_kst"]:
+        full = pd.date_range(day, day + pd.Timedelta(days=1) - pd.Timedelta(minutes=5), freq="5min")
+        expected.append(int((solar_elevation_deg(full) > 0).sum()))
+    full_expected = pd.Series(expected, index=daily.index).replace(0, np.nan)
+    daily["daylight_mean_completeness"] = daily["daylight_mean_completeness_raw"] / full_expected
+    good_c = daily["daylight_mean_completeness"].ge(DAYLIGHT_CORRECTED_MIN_RATIO)
+    daily.loc[~good_c, "daily_energy_kwh_corrected"] = np.nan
+    daily["quality_status_corrected"] = np.where(
+        good_c, "valid_daylight_corrected", "invalid_daylight_corrected_insufficient"
+    )
+    return daily
 
 
 def main() -> None:
@@ -224,6 +324,7 @@ def main() -> None:
     plant5 = build_plant_five(inv5)
     hourly = build_hourly(plant5)
     daily = build_daily(plant5)
+    daily = finalize_corrected_gate(daily)  # ★09-16★ 인버터보정 최종게이트
 
     # 공식 총출력은 반드시 10대 합과 같아야 한다(부분합 스케일업 금지 재검증).
     pivot = inv5.pivot(index="grid_time_kst", columns="inverter_number", values="ac_power_kw")
@@ -269,6 +370,15 @@ def main() -> None:
             "rows": int(len(daily)),
             "valid_rows": int(daily["daily_energy_kwh"].notna().sum()),
             "valid_pct": float(100 * daily["daily_energy_kwh"].notna().mean()),
+        },
+        # ★09-16 신규★: 인버터별 비율보정 결과 - 원본과 나란히 비교 가능하게 기록
+        "daily_corrected": {
+            "rule": f"인버터별 비율보정, 평균완전도>={DAYLIGHT_CORRECTED_MIN_RATIO} 게이트, "
+                    "daily_energy_kwh(원본)는 절대 변경 안 함",
+            "valid_rows": int(daily.get("daily_energy_kwh_corrected", pd.Series(dtype=float)).notna().sum()),
+            "valid_pct": float(100 * daily.get("daily_energy_kwh_corrected", pd.Series(dtype=float)).notna().mean())
+                         if "daily_energy_kwh_corrected" in daily else None,
+            "inverter_ratio_profile": plant5.attrs.get("inverter_ratio_profile"),
         },
         "not_done": [
             "ASOS/NWP/GRID 발행시각·대상시각 결합(기상 백필 완료 대기중)",

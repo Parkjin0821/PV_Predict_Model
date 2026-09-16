@@ -30,13 +30,13 @@ REGIONS = {
         "dir": ROOT / "부안_준비_2026-08-28",
         "builder": "factor_reverify_v6_hourly_buan_2026-09-03.py",
         "summary": "outputs/요인재검증_v6_phase2_2026-09-03/phase2_요약.json",
-        "capacity": 1000.0,
+        "capacity": 998.715,
     },
     "김제": {
         "dir": ROOT / "김제_준비_2026-09-01",
         "builder": "factor_reverify_v6_hourly_gimje_2026-09-03.py",
         "summary": "outputs/요인재검증_v6_phase2_인근일사량추가_2026-09-07/phase2_요약.json",
-        "capacity": 1100.0,
+        "capacity": 999.005,
         "nearby": {
             "전주146_인근일사량_W_m2": Path(r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\김제\인근관측소백필_v1_2026-09-01\전주146\기상청_ASOS146_시간환경_20240825_20260804.csv"),
             "정읍245_인근일사량_W_m2": Path(r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\김제\인근관측소백필_v1_2026-09-01\정읍245\기상청_ASOS245_시간환경_20240825_20260804.csv"),
@@ -46,7 +46,7 @@ REGIONS = {
         "dir": ROOT / "영광_준비_2026-09-03",
         "builder": "factor_build_v6_hourly_yeonggwang_2026-09-03.py",
         "summary": "outputs/요인구축_v6_phase2_2026-09-03/phase2_요약.json",
-        "capacity": 634.0,
+        "capacity": 639.94,
     },
 }
 

@@ -22,12 +22,17 @@ from lightgbm import LGBMRegressor
 
 HERE = Path(__file__).resolve().parent
 JOIN_PARQUET = Path(
-    r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\영광\과거발전_기상결합_v1_2026-09-03"
-    r"\영광_과거발전_ASOS_NWP_GRID_결합_v1_2026-09-03.parquet"
+    r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\영광\과거발전_기상결합_라이브연계_v1_2026-09-14"
+    r"\영광_과거발전_ASOS_NWP_GRID_결합_라이브연계_v1_2026-09-14.parquet"
 )
+# ★09-14 변경★: 09-03 정적본 → 코덱스 라이브연계본(2026-09-14까지
+# 연장, 컬럼 동일·중복 0건 확인)으로 교체. 부안 사례 교훈대로 아래
+# DAILY_ENERGY_CSV도 반드시 같이 바꿈. build_medium() 배포 재실행은
+# 안 함(코덱스 보고: 가을 완전표본 아직 0건, 영광은 발행 전 수신
+# NWP 부족이 원인).
 DAILY_ENERGY_CSV = Path(
-    r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\영광\시간집계_v1_2026-09-01"
-    r"\영광_발전소_일간_공식후보.csv"
+    r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\영광\과거발전_기상결합_라이브연계_v1_2026-09-14"
+    r"\영광_발전소_일간_라이브연계_D1검증용.csv"
 )
 OUT_DIR = HERE / "outputs" / "영광_중장기_일간_v1_2026-09-07"
 
@@ -37,6 +42,12 @@ INITIAL_TRAIN_DAYS = 90
 TEST_BLOCK_DAYS = 30
 MIN_ROWS_PER_FOLD = 30
 VIF_CORR_MIN_ROWS = 10
+
+# ★09-15 추가(Claude, 정확도개선 파일럿 #2 - 부안/김제 검증 완료, 부작용
+# 0건 확인해 실채택)★: 영광 설비용량 634kW(AGENTS.md 09-08 인버터분해
+# 항목, plant_id 7912 정원13대 - 명판 미검증 잠정치).
+CAPACITY_KW = 639.94  # ★09-16 통일★ 발전소 API 정격(AC 계통연계)으로 4지역 기준 통일. 인버터 등록용량 합계(부안1000/김제1100/영광634)는 DC·명판측 값이라 clip 상한·nMAE 분모로 부적합 - Blockdata 구성감시용으로만 남긴다.
+DAILY_CAPACITY_KWH = CAPACITY_KW * 24.0
 
 WEATHER8 = ["forecast_DSWRF", "forecast_TCDC", "forecast_LCDC", "forecast_MCDC", "forecast_HCDC",
             "forecast_REH", "forecast_POP", "forecast_SKY"]
@@ -117,11 +128,12 @@ def run_walkforward(df: pd.DataFrame, folds: list[tuple]) -> dict:
         if len(train) < MIN_ROWS_PER_FOLD or len(test) < 1:
             continue
 
-        model = LGBMRegressor(n_estimators=150, learning_rate=0.05, num_leaves=15, max_depth=4,
+        # ★09-15 변경(Claude, 규제튜닝 그리드 실측 - 부안 스크립트와 동일 근거)★
+        model = LGBMRegressor(n_estimators=150, learning_rate=0.05, num_leaves=15, max_depth=3,
                               min_child_samples=15, subsample=0.9, colsample_bytree=0.9,
                               reg_alpha=0.1, reg_lambda=1.0, random_state=SEED, n_jobs=-1, verbosity=-1)
         model.fit(train[CANDIDATE_FEATURES], train[TARGET])
-        pred_model = np.clip(model.predict(test[CANDIDATE_FEATURES]), 0, None)
+        pred_model = np.clip(model.predict(test[CANDIDATE_FEATURES]), 0, DAILY_CAPACITY_KWH)
 
         y_true = test[TARGET].to_numpy()
         pred_pers = test["daily_energy_lag1_kwh"].to_numpy()

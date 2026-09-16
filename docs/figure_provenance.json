@@ -43,5 +43,15 @@
     "file": "evidence_09.png",
     "source": "04_평가검증/outputs/광주_이상치정책_비교_v1_2026-09-09/02_이상치정책별_제거행.png",
     "sha256": "9d11a8d64d4a53cb7bead1cbd0a4a8841edabb0dd8a417d923e4a6b920e0ad90"
+  },
+  {
+    "file": "evidence_10.png",
+    "source": "04_평가검증/outputs/보고서그림_재생성_v1_2026-09-15/fig3_4지역_공백길이별_보간오차.png",
+    "sha256": "4ae468d06f49cd8386c1592a07ec2ebced356be598363fbf30e91ad57c91c594"
+  },
+  {
+    "file": "evidence_11.png",
+    "source": "04_평가검증/outputs/보고서그림_재생성_v1_2026-09-15/fig4_이상치정책_MAE_축확대.png",
+    "sha256": "f874522376b3cfeece0888758e5e91ef2fcf36b39eb58f61dc9c9532a20e5981"
   }
 ]

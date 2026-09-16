@@ -78,7 +78,7 @@ GIMJE_DIR = ROOT / "김제_준비_2026-09-01"
 YEONGGWANG_DIR = ROOT / "영광_준비_2026-09-03"
 GWANGJU_DIR = ROOT / "광주_준비_2026-09-08"
 
-CAPACITY_KW = {"부안": 1000.0, "김제": 1100.0, "영광": 634.0, "광주": 240.58}
+CAPACITY_KW = {"부안": 998.715, "김제": 999.005, "영광": 639.94, "광주": 240.0}  # ★09-16 통일★ 발전소 API 정격(AC 계통연계)으로 4지역 기준 통일. 인버터 등록용량 합계(부안1000/김제1100/영광634)는 DC·명판측 값이라 clip 상한·nMAE 분모로 부적합 - Blockdata 구성감시용으로만 남긴다.
 
 BUAN_LGBM_PARAMS = dict(
     n_estimators=150, learning_rate=0.05, num_leaves=15, max_depth=4,
@@ -133,7 +133,12 @@ def write_manifest(out_dir: Path, result: dict) -> None:
 # ------------------------------------------------------------------
 # 부안 초단기 (+1h~+4h) - LightGBM vs 선형회귀, 지속성은 평가 전용
 # ------------------------------------------------------------------
-def build_buan_ultra(rv) -> dict:
+def build_buan_ultra(rv, bundle_version: str = "공식_초단기_issue_safe_v1_2026-09-08") -> dict:
+    # ★09-14 추가★: 주기적 재학습(드리프트 감지+월1회 백스톱) 착수를 위해
+    # 출력 폴더명을 인자화. 기본값은 기존 09-08 배포 경로 그대로라
+    # bundle_version 없이 호출하면 이전과 완전히 동일하게 동작(왕복검증으로
+    # 확인 필요). 학습 로직·피처·하이퍼파라미터는 전혀 안 건드림 - 출력
+    # 경로 한 줄만 바뀜. AGENTS.md 09-14 항목 참고.
     m = load_module("buan_ultra_base", BUAN_DIR / "ultra_short_historical_backtest_v1_2026-08-31.py")
     s = m.load_plant_5min_series()
     base = m.build_features(s)
@@ -178,7 +183,7 @@ def build_buan_ultra(rv) -> dict:
             raise RuntimeError(f"부안 초단기 +{mins//60}h: 비유한 replay")
 
         horizon = f"+{mins // 60}h"
-        out_dir = BUAN_DIR / "outputs" / "공식_초단기_issue_safe_v1_2026-09-08" / horizon
+        out_dir = BUAN_DIR / "outputs" / bundle_version / horizon
         payload = {"model": final_model, "features": features, "region": "부안", "horizon": horizon,
                    "capacity_kw": capacity, "model_name": selected}
         final_path, sha = atomic_save(out_dir, payload, replay[features], pred)

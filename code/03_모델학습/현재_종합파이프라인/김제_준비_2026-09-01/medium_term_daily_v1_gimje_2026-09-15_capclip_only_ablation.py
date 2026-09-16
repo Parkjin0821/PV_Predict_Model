@@ -22,6 +22,7 @@ pooled MAE/RMSE, expanding-window 풀커버리지 폴드.
 """
 from __future__ import annotations
 
+import importlib.util
 import json
 from pathlib import Path
 
@@ -30,6 +31,26 @@ import pandas as pd
 from lightgbm import LGBMRegressor
 
 HERE = Path(__file__).resolve().parent
+
+
+def _load_module(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+# 재구현 없음 - 김제 자체 태양고도 함수 + 부안 Haurwitz(범용, 위치무관) 재사용.
+_agg = _load_module("gimje_time_aggregate_for_kt", HERE.parent.parent.parent
+                     / "02_전처리" / "김제" / "build_gimje_time_aggregates_v1_2026-08-31.py")
+_ultra = _load_module("buan_ultra_for_haurwitz_gimje", HERE.parent / "부안_준비_2026-08-28"
+                       / "ultra_short_term_v1_buan_2026-09-08.py")
+solar_elevation_deg = _agg.solar_elevation_deg
+haurwitz_clearsky_ghi_wm2 = _ultra.haurwitz_clearsky_ghi_wm2
+
+# 김제 설비용량 1,100kW(AGENTS.md 인버터 pro-rata 재조정 항목, 명판 미검증 잠정치) - 재사용.
+CAPACITY_KW = 1100.0
+DAILY_CAPACITY_KWH = CAPACITY_KW * 24.0
 JOIN_PARQUET = Path(
     r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\김제\과거발전_기상결합_라이브연계_v1_2026-09-14"
     r"\김제_과거발전_ASOS_NWP_GRID_결합_라이브연계_v1_2026-09-14.parquet"
@@ -46,7 +67,7 @@ DAILY_ENERGY_CSV = Path(
     r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\김제\과거발전_기상결합_라이브연계_v1_2026-09-14"
     r"\김제_발전소_일간_라이브연계_D1검증용.csv"
 )
-OUT_DIR = HERE / "outputs" / "김제_중장기_일간_v1_2026-09-01"
+OUT_DIR = HERE / "outputs" / "김제_중장기_일간_v1_2026-09-15_capclip_only_ablation"
 
 TARGET = "daily_energy_kwh"
 SEED = 42
@@ -55,18 +76,12 @@ TEST_BLOCK_DAYS = 30
 MIN_ROWS_PER_FOLD = 30
 VIF_CORR_MIN_ROWS = 10
 
-# ★09-15 추가(Claude, 정확도개선 파일럿 #2 - 부안 kt_capclip_candidate로
-# 격리검증 완료, 부작용 0건 확인해 실채택)★: 김제 설비용량 1,100kW
-# (AGENTS.md 인버터 pro-rata 재조정 항목, 명판 미검증 잠정치).
-CAPACITY_KW = 999.005  # ★09-16 통일★ 발전소 API 정격(AC 계통연계)으로 4지역 기준 통일. 인버터 등록용량 합계(부안1000/김제1100/영광634)는 DC·명판측 값이라 clip 상한·nMAE 분모로 부적합 - Blockdata 구성감시용으로만 남긴다.
-DAILY_CAPACITY_KWH = CAPACITY_KW * 24.0
-
 WEATHER8 = ["forecast_DSWRF", "forecast_TCDC", "forecast_LCDC", "forecast_MCDC", "forecast_HCDC",
             "forecast_REH", "forecast_POP", "forecast_SKY"]
 CANDIDATE_FEATURES = (
     [f"{v}_mean" for v in WEATHER8] + [f"{v}_max" for v in WEATHER8]
     + ["daily_energy_lag1_kwh", "doy_sin", "doy_cos"]
-)
+)  # ablation: Kt 피처 제외, 용량클리핑만 격리 테스트
 
 
 def build_daily_dataset() -> tuple[pd.DataFrame, dict]:
@@ -75,9 +90,17 @@ def build_daily_dataset() -> tuple[pd.DataFrame, dict]:
     hourly["issue_day"] = hourly["prediction_issue_time_kst"].dt.normalize()
     hourly["target_day"] = hourly["issue_day"] + pd.Timedelta(days=1)
 
+    # ★09-15 신규(Kt 청천지수 피처, 재구현 없음 - 부안 파일럿과 동일 로직)★
+    elev = solar_elevation_deg(pd.DatetimeIndex(hourly["target_time_kst"]))
+    clearsky_ghi = haurwitz_clearsky_ghi_wm2(elev)
+    hourly["forecast_kt"] = hourly["forecast_DSWRF"] / np.where(clearsky_ghi > 1e-6, clearsky_ghi, np.nan)
+    hourly["forecast_kt"] = hourly["forecast_kt"].clip(lower=0, upper=1.5)
+
     agg = hourly.groupby("issue_day").agg(
         **{f"{v}_mean": (v, "mean") for v in WEATHER8},
         **{f"{v}_max": (v, "max") for v in WEATHER8},
+        forecast_kt_mean=("forecast_kt", "mean"),
+        forecast_kt_max=("forecast_kt", "max"),
         target_day=("target_day", "first"),
         defect_rows=("is_defect_period", "sum"),
         n_hours=("target_time_kst", "count"),
@@ -90,20 +113,7 @@ def build_daily_dataset() -> tuple[pd.DataFrame, dict]:
     daily = pd.read_csv(DAILY_ENERGY_CSV)
     daily["date_kst"] = pd.to_datetime(daily["date_kst"])
     daily.loc[daily["quality_status"] != "valid_daylight_ge90pct", TARGET] = np.nan
-    # ★09-16 신규(사용자 지시 - 김제 인버터별 비율보정치 반영)★: 90%
-    # 전수게이트를 못 넘어도(김제는 인버터 10대 정렬 특성상 9월 내내
-    # 최대 0.805) 인버터별 보정(quality_status_corrected==
-    # "valid_daylight_corrected", build_gimje_time_aggregates 참고)이
-    # 있으면 그 값을 대신 쓴다. 원본이 있으면 원본을 절대 덮어쓰지
-    # 않고, 어느 쪽을 썼는지 `is_corrected`로 남겨 결과에서 구분 가능하게
-    # 한다 - AGENTS.md 09-16 참고.
-    if "quality_status_corrected" in daily.columns:
-        use_corrected = daily[TARGET].isna() & daily["quality_status_corrected"].eq("valid_daylight_corrected")
-        daily["is_corrected"] = use_corrected
-        daily.loc[use_corrected, TARGET] = daily.loc[use_corrected, "daily_energy_kwh_corrected"]
-    else:
-        daily["is_corrected"] = False
-    daily = daily[["date_kst", TARGET, "is_corrected"]].rename(columns={"date_kst": "target_day"})
+    daily = daily[["date_kst", TARGET]].rename(columns={"date_kst": "target_day"})
 
     df = agg.merge(daily, on="target_day", how="left")
 
@@ -156,8 +166,7 @@ def run_walkforward(df: pd.DataFrame, folds: list[tuple]) -> dict:
         if len(train) < MIN_ROWS_PER_FOLD or len(test) < 1:
             continue
 
-        # ★09-15 변경(Claude, 규제튜닝 그리드 실측 - 부안 스크립트와 동일 근거)★
-        model = LGBMRegressor(n_estimators=150, learning_rate=0.05, num_leaves=15, max_depth=3,
+        model = LGBMRegressor(n_estimators=150, learning_rate=0.05, num_leaves=15, max_depth=4,
                               min_child_samples=15, subsample=0.9, colsample_bytree=0.9,
                               reg_alpha=0.1, reg_lambda=1.0, random_state=SEED, n_jobs=-1, verbosity=-1)
         model.fit(train[CANDIDATE_FEATURES], train[TARGET])
