@@ -75,6 +75,7 @@ BLOCK_DB = Path(r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\광주\bl
 KMA_DB = Path(r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\광주\kma_live_inputs_v1_2026-08-25\kma_live_inputs.sqlite3")
 DIF = "DIFSWRF_bsrn정제"
 DSX = "DSWRFLX_bsrn정제"
+GWANGJU_INVERTER_CLIP_CAPACITY_KW = 241.58
 
 
 def _load(name: str, filename: str, rel: str = "."):
@@ -604,7 +605,11 @@ def assemble_and_predict(bundle: dict, horizon: int, end_time: pd.Timestamp | No
             }
         night_zero_filled = gate_result["night_zero_filled_features"]
         row = pd.DataFrame([gate_result["row"]], index=[issue_time])[bundle["features"]]
-    pred = infer.predict_kw(bundle, row)
+    # 번들의 capacity_kw는 학습 당시 정의를 보존하고, 라이브 물리 상한만
+    # 현재 인버터 등록용량 합계로 명시적으로 덮어쓴다.
+    live_bundle = dict(bundle)
+    live_bundle["clip_상한"] = GWANGJU_INVERTER_CLIP_CAPACITY_KW
+    pred = infer.predict_kw(live_bundle, row)
     target_time = issue_time + pd.Timedelta(hours=(horizon - 1))
     result = {
         "상태": "성공", "발행시각": str(issue_time), "대상시각": str(target_time),

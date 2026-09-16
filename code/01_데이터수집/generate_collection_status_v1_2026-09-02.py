@@ -444,17 +444,15 @@ def load_ultrashort_shadow(ref_now: datetime) -> dict[str, Any]:
 # 다 고친 시점부터 재시작하기로 확정(AGENTS.md 09-09 절). 그 판정
 # 기준·진행상황을 대시보드에서도 눈으로 볼 수 있게 여기서 계산한다 -
 # 기준선(성공률 95%+)만 재사용하고 판정 자체를 새로 만들지 않는다.
-# ★★09-16 재시작(사용자 승인)★★: 기존 창(09-11 13:30~)은 GHI 제거
-# (09-15 15:50 배포) **이전 결함을 4.8일 중 4.2일이나 포함**하고 있어
-# 새 코드의 검증창으로 쓸 수 없다. 실측으로도 광주 ghiOnlyWaitRows 555행이
-# 평균을 지배해 수정 효과가 가려졌다(수정 후 구간만 보면 부안·김제 100%,
-# 영광 97.7%). 그래서 검증시계를 GHI 제거 직후로 재시작한다.
-# 기존 창은 삭제하지 않고 `previousWindow`로 참고치 보존한다.
-GATE_START_KST = datetime(2026, 9, 15, 16, 0, 0, tzinfo=KST)
-GATE_JUDGE_KST = datetime(2026, 9, 22, 16, 0, 0, tzinfo=KST)
+# ★★09-16 최종 재시작★★: 광주 power_lag 최소 완화에 이어 용량 역할을
+# 인버터 등록합계(물리 clip 241.58kW)와 공식용량(nMAE 240.0kW)으로
+# 분리했다. 최종 입력·출력 정책이 반영된 첫 정기 실행부터 7일 검증한다.
+# 직전 창은 삭제하지 않고 `previousWindow`로 참고치 보존한다.
+GATE_START_KST = datetime(2026, 9, 16, 17, 50, 0, tzinfo=KST)
+GATE_JUDGE_KST = datetime(2026, 9, 23, 17, 50, 0, tzinfo=KST)
 # 수정 전 참고치(삭제 금지 - 무엇이 얼마나 나아졌는지 비교 근거)
-GATE_PREV_START_KST = datetime(2026, 9, 11, 13, 30, 0, tzinfo=KST)
-GATE_PREV_JUDGE_KST = datetime(2026, 9, 18, 13, 30, 0, tzinfo=KST)
+GATE_PREV_START_KST = datetime(2026, 9, 16, 17, 10, 0, tzinfo=KST)
+GATE_PREV_JUDGE_KST = datetime(2026, 9, 23, 17, 10, 0, tzinfo=KST)
 GATE_SLOT_MINUTES = 5
 GATE_SUCCESS_THRESHOLD_PCT = 95.0
 GATE_ACTIVE_START_MINUTE = 4 * 60 + 30
@@ -741,11 +739,12 @@ def load_gate_status(ref_now: datetime) -> dict[str, Any]:
     days_elapsed = round(elapsed_min / 1440, 1)
     status = "판정완료" if ref_now >= GATE_JUDGE_KST else "진행중"
     return {
-        # ★09-16★: 창 재시작 사실과 그 이유를 화면에서도 알 수 있게 명시.
+        # ★09-16★: 최종 창 재시작 사실과 그 이유를 화면에서도 알 수 있게 명시.
         "windowRestartedKst": GATE_START_KST.isoformat(timespec="seconds"),
         "windowRestartReason": (
-            "GHI 제거(09-15 15:50) 이전 결함을 포함한 구 창(09-11 13:30~09-18 13:30)은 "
-            "새 코드 검증창으로 부적합 - 참고치로만 보존"),
+            "광주 power_lag 최소 완화와 용량 역할 분리(물리 clip 241.58kW, "
+            "공식/nMAE 240.0kW)를 모두 반영한 09-16 17:50 정기 실행부터 "
+            "7일 재검증 - 이전 창은 참고치로 보존"),
         "previousWindow": {
             "startKst": GATE_PREV_START_KST.isoformat(timespec="seconds"),
             "judgeKst": GATE_PREV_JUDGE_KST.isoformat(timespec="seconds"),

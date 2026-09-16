@@ -34,7 +34,7 @@ ASOS_LOOKBACK_HOURS=12  # 09-16 광주 ASOS 지연 실측(p95=552분/9시간+) �
 REG={
 "광주":dict(bundle=ROOT/"광주_준비_2026-09-08"/"outputs"/"단기_재학습_후보_2026-09-09"/"+48h",
             nc=NCDIR/"광주"/"kma_nwp_d1d2_live_v1_2026-09-09"/"kma_nwp_d1d2_live.sqlite3",
-            cap=240.58),
+            cap=241.58),
 "부안":dict(plant=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\부안\blockdata_live_v1_2026-08-28\blockdata_history.sqlite3",
             kma=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\부안\kma_live_inputs_v1_2026-08-28\kma_live_inputs.sqlite3",
             bundle=ROOT/"부안_준비_2026-08-28"/"outputs"/"단기_재학습_후보_2026-09-09"/"+48h",

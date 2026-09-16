@@ -125,11 +125,15 @@ REGIONS = {
     "광주": dict(
         mode="full",
         plant_db=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\광주\blockdata_live_history_v1_2026-08-25\blockdata_history.sqlite3",
-        # ★09-16 수정★: 240.58 → 240.0. 사용자 지시로 "실시간 대시보드에
-        # 표시되는 값"(발전소 API capacity_api_kw=240)을 단일 기준으로 통일.
-        # 이 capacity는 ①예측 clip 상한 ②nMAE 분모 두 군데에 쓰인다.
-        # 변화폭 0.24%라 지표 영향은 무시할 수준이지만 기준을 하나로 맞춘다.
+        # 용량 역할 분리: 공식 설비용량 240은 nMAE 분모, 인버터 등록합
+        # 241.58은 물리적 예측 clip 상한으로 사용한다.
         plant_id=6715, expected_inverters=5, capacity=240.0,
+        clip_capacity=241.58,
+        # 09-16 실측: 광주 벤더가 새 5분 스냅샷을 한 번 건너뛸 때
+        # lag 목표와 직전/직후 완전 스냅샷의 차이가 4분대가 된다.
+        # 명목 수집주기 한 칸(5분)까지만 허용하고 그 초과 공백은 계속
+        # 결측으로 차단한다. 다른 지역은 기존 기본값 4분을 유지한다.
+        power_lag_tolerance_minutes=5.0,
         bundle_dir=ROOT / "광주_준비_2026-09-08" / "outputs" / "공식_초단기_issue_safe_v1_2026-09-08",
         solar=GWANGJU_SOLAR,
         asos_db=r"C:\Users\u-cube\JIN\코덱스\결과물\예측모델\광주\kma_live_inputs_v1_2026-08-25\kma_live_inputs.sqlite3",
@@ -333,7 +337,10 @@ def run_buan(cfg: dict) -> None:
                         "model_sha256": bundle["_sha256"]})
             continue
         X = pd.DataFrame([row])[bundle["features"]]
-        pred = float(np.clip(bundle["model"].predict(X)[0], 0, cfg["capacity"]))
+        pred = float(np.clip(
+            bundle["model"].predict(X)[0], 0,
+            cfg.get("clip_capacity", cfg["capacity"]),
+        ))
         log_attempt({"region": "부안", "horizon_h": h, "issue_time_kst": str(issue_time),
                     "target_time_kst": str(target_time), "status": "성공",
                     "predicted_kw": round(pred, 4), "model_sha256": bundle["_sha256"]})
@@ -351,11 +358,21 @@ def run_full(region: str, cfg: dict) -> None:
     solar_now = solar_elev(cfg["solar"], issue_time)
     hour = issue_time.hour + issue_time.minute / 60.0
     doy = issue_time.dayofyear
+    power_lag_tolerance_minutes = float(cfg.get("power_lag_tolerance_minutes", 4.0))
     base_row = {
         "power_lag_0min": lookup_near(series, issue_time, tol_minutes=1),
-        "power_lag_15min": lookup_near(series, issue_time - pd.Timedelta(minutes=15)),
-        "power_lag_30min": lookup_near(series, issue_time - pd.Timedelta(minutes=30)),
-        "power_lag_60min": lookup_near(series, issue_time - pd.Timedelta(hours=1)),
+        "power_lag_15min": lookup_near(
+            series, issue_time - pd.Timedelta(minutes=15),
+            tol_minutes=power_lag_tolerance_minutes,
+        ),
+        "power_lag_30min": lookup_near(
+            series, issue_time - pd.Timedelta(minutes=30),
+            tol_minutes=power_lag_tolerance_minutes,
+        ),
+        "power_lag_60min": lookup_near(
+            series, issue_time - pd.Timedelta(hours=1),
+            tol_minutes=power_lag_tolerance_minutes,
+        ),
         "solar_elevation_now": solar_now,
         "hour_sin": np.sin(2 * np.pi * hour / 24), "hour_cos": np.cos(2 * np.pi * hour / 24),
         "doy_sin": np.sin(2 * np.pi * doy / 365.25), "doy_cos": np.cos(2 * np.pi * doy / 365.25),
@@ -396,7 +413,10 @@ def run_full(region: str, cfg: dict) -> None:
                         "model_sha256": bundle["_sha256"]})
             continue
         X = pd.DataFrame([row])[bundle["features"]]
-        pred = float(np.clip(bundle["model"].predict(X)[0], 0, cfg["capacity"]))
+        pred = float(np.clip(
+            bundle["model"].predict(X)[0], 0,
+            cfg.get("clip_capacity", cfg["capacity"]),
+        ))
         log_attempt({"region": region, "horizon_h": h, "issue_time_kst": str(issue_time),
                     "target_time_kst": str(target_time), "status": "성공",
                     "predicted_kw": round(pred, 4), "model_sha256": bundle["_sha256"]})
